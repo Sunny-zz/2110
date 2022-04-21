@@ -34,8 +34,11 @@
     // 对象的解构赋值
     // let { userage, username } = user
 
+    // 对象的解构赋值重命名
+    // let { userage:age , username } = user
+
     // console.log(username);
-    // console.log(userage);
+    // console.log(age);
 
     // 数组的解构赋值
     // let [a, b, c] = [1, 2, 3];
@@ -93,6 +96,7 @@
     // 参数部分 没有参数必须写 () , 有参数可在括号里面写参数,只有一个参数 可以省略() 直接写参数
     // 箭头函数 箭头右侧
     // 函数的执行内容部分 直接写 {} 里面写需要执行的语句包括 return，当函数内部只有返回值的时候 可以省略 {} 以及 return 直接写返回值, 还有的时候，函数内部只有一步操作，而且不需要返回值，那么也可以直接省略 {} 直接写操作,也就是直接将操作当成返回值了(因为函数不需要返回值，所以无所谓)。
+    // 当函数没有其他操作只是返回一个对象的话，那么可以写成 ({})
     // let fun = () => {
     //   console.log(1111);
     // }
@@ -109,17 +113,140 @@
     // console.log(arr)
     // console.log(res)
     // 箭头函数和普通函数内的 this 指向 不同
-    let obj = {
-      username: '第嘉',
-      say: () => {
-        console.log(this);
-        console.log(this.username);
-      }
-    }
-    obj.say()
-
+    // let obj = {
+    //   username: '第嘉',
+    //   say: () => {
+    //     console.log(this);
+    //     console.log(this.username);
+    //   }
+    // }
+    // obj.say()
     // 箭头函数创建的时候就绑定 this 指向
     // 如果不是在 class 内创建的箭头函数，内部的 this 基本都是 window
+    // 箭头函数 不能使用arguments
+    // let fun1 = (a,b) => ({username : a, userage: b})
+
+    // 数组的方法中使用箭头函数
+    // let arr = [1,2,3,4,5,6]
+    // let res = arr.filter(function (ele) {
+    //   return ele%2 === 1
+    // })
+    // let res = arr.filter(ele => ele%2 === 1)
+    // console.log(res);
+
+    // let arr1 = [23,34,54,23,112,345,67,43]
+    // let res = arr1.reduce((res, ele)=> res + ele, 0)
+    // console.log(res)
+
+    // let res1 = arr1.every(ele => ele%2 === 0)
+    // console.log(res1)
+
+
+    // try {
+    //   console.log(a);
+    // } catch (error) {
+    //   console.log('失败了' + error);
+    // }
+
+    // 函数的剩余参数
+    // 函数实参的集合     rest 剩余参数   是一个数组
+    // 剩余参数只能当做函数参数的最后一个
+    // 箭头函数内同样可以使用
+    // function fun(a,...rest) {
+    //   console.log(rest);
+    // }
+    // fun(1,2,3,4,5,6,7,8)
+
+    // 对象的扩展
+    // 1. 简洁表示
+    // let obj = {
+    //   a: 10,
+    //   // 对象内的方法可以直接省略 function 
+    //   say(){
+    //     console.log(this.a);
+    //   }
+    // }
+
+    // let username = 'haha'
+    // let userage = 5
+
+    // 当属性名与属性值表示的变量名相同的时候，创建的对象可以简写如下
+    // let user ={
+    //   username,
+    //   userage
+    // }
+
+    // 2.属性名表达式 
+    // 就是可以用一些特殊的内容当作属性名
+    // let obj = {}
+    // obj['a' + 'bc'] = 123;
+    // console.log(obj);
+
+    // 3. 对象属性的遍历
+    // （1）for...in
+    // （2）Object.keys(obj) 不可遍历 不可枚举属性
+    // （3）Object.getOwnPropertyNames(obj) 可以遍历 不可枚举属性
+
+    // let obj = {
+    //   a: 10,
+    //   b: 20
+    // }
+    // Object.defineProperty(obj, 'c', {
+    //   writable: true,
+    //   value: 30,
+    //   enumerable: false
+    // })
+    // console.log(obj);
+    // console.log(Object.keys(obj));
+    // console.log(Object.getOwnPropertyNames(obj));
+
+    // 4. 对象的扩展运算符  浅拷贝对象
+    // let point = {
+    //   x: 10,
+    //   y: -10,
+    //   theme: {
+    //     color: 'red',
+    //     bgColor: 'blue'
+    //   }
+    // }
+
+    // 相当于拷贝了 point 对象
+    // let pointCopy = {...point}
+
+    // pointCopy.z = 5
+    // pointCopy.theme.color = 'gray'
+    // console.log(pointCopy);
+    // console.log(point);
+
+    // let arr = [1,2,3]
+    // let arrCopy = [...arr]
+    // arrCopy.push(4)
+    // console.log(arr);
+    // console.log(arrCopy);
+
+
+    // null 判断运算符
+    // let response = {
+    //   msg: 0
+    // }
+    // 当我需要从后端获取的数据对象 response 中， 获取 msg 属性的属性值时， 如果没有该属性那么就使用默认值，如果有就用该值
+    // let defaultValue
+    // if(response.msg === undefined  ||response.msg === null){
+    //   defaultValue  = '默认值'
+    // }else{
+    //   defaultValue = response.msg
+    // }
+
+    // 下面的赋值运算只有在 ?? 前面是 null | undefined 的时候才会赋值后面的值
+    // let defaultValue = response.msg ?? '默认值'
+
+    // Symbol
+    const x = Symbol('13123')
+    const y = Symbol('13123')
+    console.log(x === y);
+
+    // 使用 Symbol 当作对象的属性名
+
   </script>
 </body>
 
