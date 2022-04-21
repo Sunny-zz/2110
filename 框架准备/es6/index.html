@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // let 和 const 创建变量
+
+    // 没有变量声明提升
+    // 不允许重复声明
+    // 拥有块级作用域 {} 就是作用域
+    // const 用于定义常量(永远不会改变的变量) 不能被修改 一般命名全部写, 声明的时候必须赋值
+    // let 和 const 创建的全局变量不是 window 下的属性了
+
+    // let a
+    // if(true) {
+    //   a = 100
+    // }
+    // console.log(a);
+
+    // 变量的解构赋值
+    // let user = {
+    //   username: '第嘉',
+    //   userage: 5
+    // }
+    // let username = user.username
+    // let userage = user.userage
+    // 对象的解构赋值
+    // let { userage, username } = user
+
+    // console.log(username);
+    // console.log(userage);
+
+    // 数组的解构赋值
+    // let [a, b, c] = [1, 2, 3];
+
+    // 字符串的结构赋值
+    // let [aa, bb, cc] = 'hello'
+    // console.log(aa, bb, cc);
+
+    // 函数参数的解构赋值
+    // 传递参数必须是 user 对象
+    // function showName({ username }) {
+    //   console.log('一顿操作展示 姓名' + username);
+    // }
+    // showName(user)
+
+    // 使用解构赋值交换变量的值
+    // let x = 100
+    // let y = 200
+
+    // ;[x, y] = [y, x]
+
+    // console.log(x, y)
+
+    // 字符串的扩展 
+    // 1. 模板字符串
+    // let name = 'xx'
+    // console.log(`我的名字是${name}`)
+
+    // console.log(Math.trunc(-1.1111111))
+
+    // console.log(typeof 123n);
+
+    // 函数参数默认值
+    // function point(x = 1, y = 2) {
+    //   // 如果没有传递 x y 函数调用的时候展示的就是 undefined 不友好，需要提供默认值
+
+    //   console.log(`(${x},${y})`)
+    // }
+
+    // point(10,20)
+
+    // 箭头函数
+    // 函数的新写法
+    // 只能使用变量式创建
+    // function add(a, b) {
+    //   return a + b
+    // }
+    // let fun1 = function () {
+    //   console.log(1111);
+    // }
+
+
+
+    // 箭头函数 箭头左侧 
+    // 参数部分 没有参数必须写 () , 有参数可在括号里面写参数,只有一个参数 可以省略() 直接写参数
+    // 箭头函数 箭头右侧
+    // 函数的执行内容部分 直接写 {} 里面写需要执行的语句包括 return，当函数内部只有返回值的时候 可以省略 {} 以及 return 直接写返回值, 还有的时候，函数内部只有一步操作，而且不需要返回值，那么也可以直接省略 {} 直接写操作,也就是直接将操作当成返回值了(因为函数不需要返回值，所以无所谓)。
+    // let fun = () => {
+    //   console.log(1111);
+    // }
+    // let fun1 = a => Math.trunc(a)
+    // let fun2 = (a, b) => a + b
+    // let fun3 = (a, b) => {
+    //   a ++
+    //   b ++
+    //   return a + b 
+    // }
+    // let fun4 = (arr, num) => arr.push(num)
+    // let arr = [1,2,3]
+    // let res = fun4(arr, 400)
+    // console.log(arr)
+    // console.log(res)
+    // 箭头函数和普通函数内的 this 指向 不同
+    let obj = {
+      username: '第嘉',
+      say: () => {
+        console.log(this);
+        console.log(this.username);
+      }
+    }
+    obj.say()
+
+    // 箭头函数创建的时候就绑定 this 指向
+    // 如果不是在 class 内创建的箭头函数，内部的 this 基本都是 window
+  </script>
+</body>
+
+</html>

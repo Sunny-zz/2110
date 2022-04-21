@@ -105,13 +105,18 @@ github 网站是一个代码托管平台。
 
 
 
-## 
-github 网站 托管项目。
-本地 编辑项目 更新到 github （使用 git软件）
+### git 常用命令
+- git init 初始化文件夹为 github 仓库
+- git add .  将本次的所有修改记录到远端，缓存下来
+- git commit -m'留言' 将所有的缓存修改制作版本
+- git push  将版本上传   
+  - 有些情况直接 push 会失败，需要执行其他的 push 命令。`git push -u origin master   git push --up-stream origin dev`
+- git pull 拉取远端更新到本地 也可以使用 git pull origin master 拉取主分支的更新
+- git merge 合并分支更新
+- git status 查看当前仓库的状态
+- git branch 新建查看分支
+- git checkout 切换    -b 参数新建并切换
+- git config --global 设置 git 的全局配置
+- git remote add  给本地仓库添加远端地址(将本地和远端连接起来)
+- git clone 克隆项目到本地
 
-git add .
-git commit -m''
-git push
-
-git init
-git checkout -b 新分支
