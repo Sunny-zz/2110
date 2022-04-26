@@ -6,10 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: #ccc;
+    }
+  </style>
 </head>
 
 <body>
   <button class="btn">按钮</button>
+  <div class="box"></div>
   <script>
     // let 和 const 创建变量
 
@@ -347,59 +355,279 @@
     // myCat.say()
 
     // class {}  一般只能写方法 ，而且方法之间不需要符号
-    class Cat {
-      // constructor 是 class 默认自带的方法
-      // constructor 就相当于之前的构造函数
-      // 不需要传值就创建的属性
-      type = '猫'
+    // class Cat {
+    //   // constructor 是 class 默认自带的方法
+    //   // constructor 就相当于之前的构造函数
+    //   // 不需要传值就创建的属性
+    //   type = '猫'
 
-      constructor(name, age, nickname) {
-        this.name = name
-        this.age = age
-        // nickname 由两部分组成 是一个字符串 用空格隔开
-        this.nickname = nickname
-        // this.type = '猫'
-      }
-      // 其他的 非 constructor 方法就相当于之前写在 prototype 原型内的
+    //   constructor(name, age, nickname) {
+    //     this.name = name
+    //     this.age = age
+    //     // nickname 由两部分组成 是一个字符串 用空格隔开
+    //     this.nickname = nickname
+    //     // this.type = '猫'
+    //   }
+    //   // 其他的 非 constructor 方法就相当于之前写在 prototype 原型内的
 
-      // 创建的方法 写不写等号 区别是 写等号的相当于在构造函数中创建的，不写的相当于在 原型中
-      // say() {
-      //   console.log(this.name);
-      // }
-      // say = function() {
-      //   console.log(this.name);
-      // }
-      // 当你想用箭头函数创建方法的时候必须用 赋值方式
-      say = () => {
-        console.log(this.name);
-      }
-      // 在类内可以直接使用 get 和 set 对属性进行存取描述
-      // get 计算属性， 对原有的属性进行计算
-      get firstNickname() {
-        return this.nickname.split(' ')[0]
-      }
-      // set 修改计算属性, 其实就是修改计算属性的来源
-      set firstNickname(value) {
-        // 就是修改 nickname
-        let arr = this.nickname.split(' ')
-        arr[0] = value 
-        this.nickname = arr.join(' ')
-      }
-      // 静态方法 之前直接使用 构造函数.xx 创建
-      // 是直接绑定在 class 上的 也就是 Cat.fun
-      static sayInfo(){
-        console.log('我是猫科类动物');
-      }
-    }
-    let cat = new Cat('小白', 1, 'x test')
-    // new Cat 的时候会触发 constructor 函数， this 指向实例化对象
-    cat.say()
-    cat.color = 'black'
-    cat.firstNickname = 'xx'
-    console.log(cat);
-    Cat.sayInfo()
-    cat.say()
+    //   // 创建的方法 写不写等号 区别是 写等号的相当于在构造函数中创建的，不写的相当于在 原型中
+    //   // say() {
+    //   //   console.log(this.name);
+    //   // }
+    //   // say = function() {
+    //   //   console.log(this.name);
+    //   // }
+    //   // 当你想用箭头函数创建方法的时候必须用 赋值方式
+    //   say = () => {
+    //     console.log(this.name);
+    //   }
+    //   // 在类内可以直接使用 get 和 set 对属性进行存取描述
+    //   // get 计算属性， 对原有的属性进行计算
+    //   get firstNickname() {
+    //     return this.nickname.split(' ')[0]
+    //   }
+    //   // set 修改计算属性, 其实就是修改计算属性的来源
+    //   set firstNickname(value) {
+    //     // 就是修改 nickname
+    //     let arr = this.nickname.split(' ')
+    //     arr[0] = value 
+    //     this.nickname = arr.join(' ')
+    //   }
+    //   // 静态方法 之前直接使用 构造函数.xx 创建
+    //   // 是直接绑定在 class 上的 也就是 Cat.fun
+    //   static sayInfo(){
+    //     console.log('我是猫科类动物');
+    //   }
+    // }
+    // let cat = new Cat('小白', 1, 'x test')
+    // // new Cat 的时候会触发 constructor 函数， this 指向实例化对象
+    // cat.say()
+    // cat.color = 'black'
+    // cat.firstNickname = 'xx'
+    // console.log(cat);
+    // Cat.sayInfo()
+    // cat.say()
 
+
+
+
+
+    // class 
+    // class Animal {
+    //   // 属性的新写法
+    //   hobby = ['eat']
+    //   constructor(name, age){
+    //     this.name = name
+    //     this.age = age 
+    //     this.x = 100
+    //   }
+    //   say(){
+    //     console.log('我的名字是'+this.name)
+    //   }
+    //   // say = () => {
+    //   //   console.log('我的名字是'+this.name)
+    //   // }
+    //   // 计算属性
+    //   // get introStr () {
+    //   //   return '我的名字是' + this.name+ ',' + '今年' + this.age + '岁了。'
+    //   // }
+    //   // set introStr(value) {
+    //   //   // console.log(value)
+    //   //   this.name = '小花儿'
+    //   //   this.age = 2
+    //   // }
+
+    //   // 类的方法  并不是实例化对象的方法 只有类才能调用
+    //   static showIntroStr () {
+    //     console.log(this.introStr);
+    //   }
+    // }
+    // const animal = new Animal('小蓝儿', 3)
+    // animal.introStr = '我的名字是小花儿今年2岁了。'
+    // console.log('我的名字是' + animal.name+ ',' + '今年' + animal.age + '岁了。');
+    // Animal.showIntroStr()
+
+    // class 的继承
+
+    // class Dog extends Animal{
+    //   a = '汪汪汪'
+    //   constructor(name, age){
+    //     super(name, age)
+    //   }
+    // }
+
+    // const dog = new Dog('大黑', 3)
+
+    // console.log(dog)
+    // Object.getPrototypeOf(子类) 获取子类 class 继承的父类 class
+    // console.log(Object.getPrototypeOf(Dog))
+
+    // console.log(Dog.prototype);
+
+    // Promise 
+    // 异步编程解决方案
+
+    // document.querySelector('.btn').onclick = function() {
+    //   requestAnimationFrame(move)
+    //   console.log(11111111);
+    // }
+    // let num = 0
+    // function move() {
+    //   console.log(2222222);
+    //   num ++ 
+    //   document.querySelector('.box').style.transform =  `translateX(${num}px)`
+    //   requestAnimationFrame(move)
+    // }
+
+    // 左   右(判断)  上   下
+    // 回调函数解决异步操作问题
+    // 回调地狱
+    // $('.xxx').xxx(1000, function () {
+    //   $('.xxx').xxxx(10000, function () {
+    //     if(true){
+    //       $().xxx(10000, function () {
+
+    //       })
+    //     }else{
+    //       $().xxx(10000, function () {
+
+    //       })
+    //     }
+    //   })
+    // })
+
+    // 使用 promise 解决
+
+    // Promise 是一个构造函数(类) 需要一个实例化的 promise 来解决异步
+    // 将 异步操作封装到 promise 中，来解决异步
+    // 参数是一个函数, 这个参数函数接收两个参数  resolve  reject, 这两个参数都是函数
+    // let x = function (num) {
+    //   return new Promise(function (resolve, reject) {
+    //     let a = 100
+    //     setTimeout(function () {
+    //       // 异步回调
+    //       // resolve 表示异步成功结束要做的事
+    //       a = 150
+    //       if(a > 100){
+    //         console.log(num)
+    //         resolve(a)
+    //       }else{
+    //         reject('a 的结果出错啦')
+    //       }
+    //     }, 1000)
+    //   })
+    // }
+    // promise 实例化的(new)时候 传递的参数函数会立即出发， 所以一般将实例化 promise(封装异步) 放到函数内, 并且将 实例(new 的结果)返回
+    // promise 实例的 then 方法就是要传递 resolve 函数的, resolve 的返回值就是 then 的返回值
+    // x(1).then(res => {
+    //   console.log(res)
+    //   return x(2)
+    // }).catch(err => {
+    //   console.log(err)
+    // }).then(res => {
+    //   console.log(res);
+    // })
+    // promise 的三个状态
+    // pending 进行中
+    // fulfilled（已成功） resolved
+    // rejected（已失败）
+
+
+    // 除了 then catch 还有 finally 方法
+
+
+    // Promise 构造函数 还有几个静态方法
+    // Promise.all
+
+    let p1 = () => new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let res = '失败1'
+        if (res === '成功1') {
+          resolve(res)
+        } else {
+          reject(res)
+        }
+      }, 1000)
+    })
+
+    let p2 = () => new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let res = '失败2'
+        if (res === '成功2') {
+          resolve(res)
+        } else {
+          reject(res)
+        }
+      }, 2000)
+    })
+
+    let p3 = () => new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let res = '失败3'
+        if (res === '成功3') {
+          resolve(res)
+        } else {
+          reject(res)
+        }
+      }, 3000)
+    })
+
+    // 同时执行三个异步操作，但是要求三个异步全部执行完毕之后再去执行一些事，此时可以使用 Promise.all
+
+    // Promise.all   p1 p2 p3 全部执行 resolve 了，整个 all 就会执行 then 得到的结果是三个成功的， p1 p2 p3 只要有一个 reject 了，那整个 all 执行的就是 catch 得到的结果就是失败的那个
+    // Promise.all([p1(), p2(), p3()]).then(res => {
+    //   console.log(res);
+    // }).catch(err=> {
+    //   console.log(err)
+    // })
+
+    // Promise.race
+    // p1 p2 p3 之中有一个先执行了 resolve ，那么 react会执行 then 得到 resolve 的结果，如果有一个 reject 先执行了，那么 race 就会执行 catch, 得到 reject 的结果
+    // Promise.race([p1(), p2(), p3()]).then(res => {
+    //   console.log(res);
+    // }).catch(err=> {
+    //   console.log(err)
+    // })
+
+    // Promise.allSettled
+    // p1  p2  p3 无论完成未完成都会的到结果
+    // Promise.allSettled([p1(), p2(), p3()]).then(res => {
+    //   console.log(res);
+    // }).catch(err=> {
+    //   console.log(err)
+    // })
+
+    // Promise.any
+    // p1  p2  p3 如果出现了 resolve 了，那么 any 就会执行 then 得到 resolve 的结果。如果三个都执行了 reject 那么 any 就会执行 catch 得到失败的提示
+    // Promise.any([p1(), p2(), p3()]).then(res => {
+    //   console.log(res);
+    // }).catch(err=> {
+    //   console.log(err)
+    // })
+
+
+
+
+    // 使用 Generator 解决    简写语法 async
+    // Generator 函数
+    // function* helloWorldGenerator() {
+    //   console.log('Generator 函数')
+    //   yield 'hello';
+    //   yield 'world';
+    //   return 'ending';
+    // }
+    // let hw = helloWorldGenerator()
+    // Generator 函数调用之后函数内部并不会执行也不会返回对应的值， 而是返回一个对象 ， 需要调用对象下的 next 方法
+    // console.log(hw)
+    // let res = hw.next()
+    // let res1 = hw.next()
+    // let res2 = hw.next()
+    // let res3 = hw.next()
+    // console.log(res)
+    // console.log(res1)
+    // console.log(res2)
+    // console.log(res3)
+    
   </script>
 </body>
 

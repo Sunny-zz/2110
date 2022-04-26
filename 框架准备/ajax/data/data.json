@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": "u87y87yy78",
+      "username": "小刘",
+      "userage": 25
+    },
+    {
+      "id": "4r53212",
+      "username": "小赵",
+      "userage": 26
+    },
+    {
+      "id": "79i9i7y",
+      "username": "老李",
+      "userage": 35
+    }
+  ]
+}

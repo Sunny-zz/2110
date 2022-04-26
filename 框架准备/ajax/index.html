@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button class="btn">请求 users 数据</button>
+  <script>
+    // 原生 ajax 请求
+    document.querySelector('.btn').onclick = function () {
+      // XMLHttpRequest 对象 来发送请求获取数据
+      // XMLHttpRequest 是一个构造函数
+      // 请求步骤
+      // 1. 创建 xhr 对象
+      let xhr = new XMLHttpRequest()
+      // 2. xhr 的 open 方法创建一个请求，设置请求的方法类型，还可以设置请求是否异步（100% 异步， 默认就是异步的）
+      // get 方法
+      xhr.open('GET', 'http://localhost:3008/users')
+      // 3. xhr 的 send 方法发出请求
+      xhr.send()
+      // 4. xhr 的 onreadystatechange 事件监听 监听请求过程获取请求结果
+      xhr.onreadystatechange = function () {
+        // 利用请求的状态和状态码判断请求是否成功
+        // xhr.readyState   xhr.status  属性
+        if (xhr.readyState == 4 && xhr.status >= 200) {
+          // xhr.responseText 后台返回的结果
+          console.log('请求成功' + xhr.responseText)
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
