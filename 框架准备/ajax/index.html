@@ -10,29 +10,135 @@
 
 <body>
   <button class="btn">请求 users 数据</button>
+  <button class="btn1">添加 users 数据</button>
+  <script src="./jquery.min.js"></script>
+  <script src="./axios.min.js"></script>
   <script>
     // 原生 ajax 请求
-    document.querySelector('.btn').onclick = function () {
-      // XMLHttpRequest 对象 来发送请求获取数据
-      // XMLHttpRequest 是一个构造函数
-      // 请求步骤
-      // 1. 创建 xhr 对象
-      let xhr = new XMLHttpRequest()
-      // 2. xhr 的 open 方法创建一个请求，设置请求的方法类型，还可以设置请求是否异步（100% 异步， 默认就是异步的）
-      // get 方法
-      xhr.open('GET', 'http://localhost:3008/users')
-      // 3. xhr 的 send 方法发出请求
-      xhr.send()
-      // 4. xhr 的 onreadystatechange 事件监听 监听请求过程获取请求结果
-      xhr.onreadystatechange = function () {
-        // 利用请求的状态和状态码判断请求是否成功
-        // xhr.readyState   xhr.status  属性
-        if (xhr.readyState == 4 && xhr.status >= 200) {
-          // xhr.responseText 后台返回的结果
-          console.log('请求成功' + xhr.responseText)
-        }
-      }
-    }
+
+    // get 请求获取 users 数据
+    // document.querySelector('.btn').onclick = function () {
+    //   // XMLHttpRequest 对象 来发送请求获取数据
+    //   // XMLHttpRequest 是一个构造函数
+    //   // 请求步骤
+    //   // 1. 创建 xhr 对象
+    //   let xhr = new XMLHttpRequest()
+    //   // 2. xhr 的 open 方法创建一个请求，设置请求的方法类型，还可以设置请求是否异步（100% 异步， 默认就是异步的）
+    //   // get 方法  传递参数方式在地址的查询部分传递参数 
+    //   xhr.open('GET', 'http://localhost:3008/users?userage=29&username=小蓝')
+    //   // 3. xhr 的 send 方法发出请求
+    //   xhr.send()
+    //   // 4. xhr 的 onreadystatechange 事件监听 监听请求过程获取请求结果
+    //   xhr.onreadystatechange = function () {
+    //     // 利用请求的状态和状态码判断请求是否成功
+    //     // xhr.readyState   xhr.status  属性
+    //     if (xhr.readyState == 4 && xhr.status >= 200) {
+    //       // xhr.responseText 后台返回的结果
+    //       console.log('请求成功' , JSON.parse(xhr.responseText))
+    //     }
+    //   }
+    // }
+    // post 请求，添加新用户
+    // document.querySelector('.btn1').onclick = function () {
+    //   let xhr = new XMLHttpRequest()
+    //   xhr.open('POST','http://localhost:3008/users')
+    //   // 使用 send 传递数据并发出请求
+    //   // 传递的数据是有默认格式的， 直接传递对象接收不到 ，需要修改传递数据的类型
+    //   // 前后端的数据交互都是用 json 类型， 就需要前端传递 json 数据给后端, 
+    //   // 通过 xhr.setRequestHeader() 来设置请求头的一些配置
+    //   xhr.setRequestHeader("Content-type", "application/json")
+    //   xhr.send(JSON.stringify({username: '小王', userage: 26}))
+    //   xhr.onreadystatechange = function () {
+    //     if (xhr.readyState == 4 && xhr.status >= 200) {
+    //       console.log('请求成功' , JSON.parse(xhr.responseText))
+    //     }
+    //   }
+    // }
+    // JSON.stringfy(对象)  对象转 json   JSON.parse(json 串) 将 json 串转化成对象
+
+
+    // jquer ajax
+    // get 请求
+    // $.get(地址,成功的回调)
+    // $.ajax({})
+    // $('.btn').click(function () {
+    //   // $.get('http://localhost:3008/users', function (res) {
+    //   //     console.log(res)
+    //   //   }
+    //   // )
+
+    // $.ajax({
+    //   // url: 'http://localhost:3008/users?userage=29&username=小蓝',
+    //   url: 'http://localhost:3008/users',
+    //   data: { userage: 29, username: '小蓝' },
+    //   method: 'GET',
+    //   success: function (res) {
+    //     console.log(res)
+    //   }
+    // })
+    // })
+
+    // $('.btn1').click(function () {
+    //   // $.post('http://localhost:3008/users', {username: '小蓝', userage: 29}, function (res) {
+    //   //     console.log(res)
+    //   //   }
+    //   // )
+    //   $.ajax({
+    //     url: 'http://localhost:3008/users',
+    //     method: 'POST',
+    //     data: { username: '小蓝', userage: 29 },
+    //     success: function (res) {
+    //       console.log(res)
+    //     }
+    //   })
+    // })
+
+    // fetch  
+    // get 请求
+
+    // $('.btn').click(function () {
+    //   fetch('http://localhost:3008/users')
+    //     .then(response => response.json())
+    //     .then(data => console.log(data));
+    // })
+    // post 请求
+    // $('.btn1').click(function () {
+    //   fetch('http://localhost:3008/users',{
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({ username: '小黑', userage: 28 })
+    //   })
+    //     .then(response => response.json())
+    //     .then(data => console.log(data));
+    // })
+
+    // axios
+    // axios 使用的时候会将后端返回的结果封装到一个对象内，对象下的 data 属性是后端返回的数据
+    // get 请求
+    // $('.btn').click(function () {
+    //   axios.get('http://localhost:3008/users').then(res => {
+    //     console.log(res.data)
+    //   })
+    // })
+
+    // post 请求
+    // $('.btn1').click(function () {
+    //   axios.post('http://localhost:3008/users', {username: 'lucy', userage: 24}).then(res => {
+    //     console.log(res.data)
+    //   })
+    // })
+
+    // async  语法    Generator 语法糖
+    // axios 请求使用 async 语法改写 省略 then 将异步类似变成同步
+
+    // 当一个函数内出现了异步( axios 请求), 那么将这个函数写成 async 函数 ,函数内部可以使用 await 紧跟着异步语句, 这个异步语句就变成同步的了, await 还会返回 axios 的请求结果
+    // await 可以将 promise 以及 async 函数 制作成同步
+    // $('.btn').click(async function () {
+    //   const res = await axios.get('http://localhost:3008/users')
+    //   console.log(res)
+    // })
   </script>
 </body>
 
