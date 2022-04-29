@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkes6_module=self.webpackChunkes6_module||[]).push([[4],{4:(e,s,l)=>{l.r(s),l.d(s,{d:()=>u,default:()=>o}),console.log(1e3);const u=100,o=1e3}}]);

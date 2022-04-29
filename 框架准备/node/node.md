@@ -12,7 +12,8 @@ node 的包(node 的插件)，不仅包括后端包，也包括几乎所有前�
 ## 使用
 - 将项目制作成 npm 项目 进入项目 执行 `npm init -y`,项目内会生成一个 package.json 文件， 该文件就是 npm 帮助你管理项目以依赖的文件
 - 想要使用依赖必须使用 npm 下载，这样才能帮助你管理。 打开命令行工具 执行 `npm i jquery`, 下载 jquery 到你的项目
-
+- 借助 webpack 工具编译打捆 模块代码
+- 页面中使用编译打捆后的 js 文件
 
 ## 如何下载包
 - `npm install(i) 包名 -g` 全局下载一个包，这个下载的包安装在系统内,在电脑的任何地方都可以使用(一般安装的是 node 的开发工具包)
@@ -48,6 +49,10 @@ es6
 - 核心模块     node 自带的包
 - 第三方模块   node 的第三方包
 - 自定义模块   自己写 js 文件
+
+node 模块语法  
+- module.exports 导出   module.exports = 任何值     
+- require 导入   require('包名|路径')
 
 ## 如何使用 webpack 
 - 进入项目打开命令行工具安装webpack 以及 weboack-cli `npm install webpack webpack-cli --save-dev`
