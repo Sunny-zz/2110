@@ -5,6 +5,53 @@ Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进
 ## 搭建 vue 开发环境
 - 安装 node
 - 安装 vue-cli (官方推荐的搭建vue项目开发环境的工具 当前版本是 5.0.4)  `npm i -g @vue/cli`, 安装好了之后 vue 命令就可以使用了。
-- 利用该工具搭建开发环境
-  - 使用 vue ui 命令调出 创建开发环境的图形化界面工具(vue 项目管理器)， 前提是 vuecli 的版本是 3+ 
-  - 
+
+### 利用该工具搭建开发环境
+  1. 使用 vue ui 命令调出 创建开发环境的图形化界面工具(vue 项目管理器)， 前提是 vuecli 的版本是 3+ 
+  2. 使用 vue 命令直接在命令行搭建项目。创建命令 `vue create 项目名`
+
+### 如何运行项目
+  - 如果是使用 vue-cli 官方脚手架创建的项目环境，那么 package.json 的 scripts 字段没有被修改的话，项目启动命令是 `npm rum serve`, 也可以使用 vue ui 启动可视化工具来启动项目，前提是 vuecli 版本是 3+
+  - 不知道是怎么搭建的环境，直接去 package.json 找 scripts 字段，一般 serve 或者 start 命令就是启动项目命令。需要使用 `npm run 命令` 启动。
+
+### vue-cli 创建的项目的项目构成
+- README.md 项目的说明文档，创建时自带的
+- package.json 和 package-lock.json  node 项目的标志 ， 着重看 package.json 中的 scripts 字段
+- .gitignore 当你的项目是 git 仓库时，忽略上传的文件和文件夹都写在 .ignore 内
+- babel.config.js 是 js 编译(就是高版本的 js 编译成低版本的， 比如 es6 + 编译成 es5)的配置。
+- jsconfig.js 项目的 js 的配置文件。
+- vue.config.js vuecli 的配置文件。
+- node_modules node 项目包存放的地方
+- public 项目的首页模版页面
+- src 开发源代码, 开发的主要工作。
+
+### 单页面应用（SPA）
+现在的框架基本上搭建出来的页面都是单页面应用(可以做多页应用).整个项目只有一个页面，利用框架的路由功能实现多页效果。
+
+### src 文件夹
+项目开发主要就在这个文件夹内。
+- main.js 项目的入口文件。是 webpack 打包的文件。
+- App.vue 组件。vue 项目中都是以组件为基础组成页面，一个组件就是页面中的一部分结构(包括 html css js)。
+- components 其他组件
+- assets 放图片 css 字体等资源
+
+### 组件
+.vue 后缀的就是组件，有三部分构成 template  script  style
+template 只能有一个子级，里面可以嵌入 vue 语法
+
+script 需要默认导出一个对象，对象内需要严格遵守 vue 语法, 一般导出的对象内需要写一个 name 属性，属性的属性值是组件名字符串，其实可以不写，对象内如果不需要添加任何内容可以省略 script 标签
+
+style 就是样式 但是样式是全局的(可能和其他组件的样式冲突),
+
+组件名 两种命名方式
+1. 首字母大写 大驼峰方式  比如  HelloWorld.vue  ShoppingCart.vue
+2. 烤串方式  比如 hello-world.vue
+
+组件如何划分？
+
+### 组件的嵌套（父组件中如何展示子组件）
+- 在父组件中的 script 内导入需要使用的子组件(默认导入即可，导入的名字跟组件名一致)
+
+- 在 script 默认导出的对象内，的 components 属性(该属性的属性值是一个对象)内注册子组件。就是写个属性属性值是组件(导入的那个)，属性名和组件名一致。
+
+- 在 template 内使用 components 内注册好的属性名当成标签直接使用
