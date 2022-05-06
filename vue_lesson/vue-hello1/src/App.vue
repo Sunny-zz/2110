@@ -4,12 +4,15 @@
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <img src="./assets/11.jpg" alt="">
     <FirstComponent />
-    <div class="box"></div>
+    <div class="box1"></div>
     <hr>
     <GoodsItem title='生鲜馆' secondTitle='尝遍天下鲜' picOne='https://img13.360buyimg.com/img/s100x100_jfs/t1/177052/17/11003/120319/60d4099aEe6c40bef/0a1ea8aec41c528c.jpg!cc_100x100.webp' picTwo='https://img12.360buyimg.com/img/s100x100_jfs/t1/150926/15/4469/167602/5f977d54Ee011e70f/686c2f3b3a4d99d5.jpg!cc_100x100.webp' />
-    <GoodsItem title='Joy' secondTitle='Joy' :picOne='picOne' :picTwo='picTwo' />
-    <!-- html 中没有数字的概念，所以 template 中要使用数字的话需要使用模版语法 -->
-    <GoodsItem :secondTitle='10' :picOne='picOne' :picTwo='picTwo' />
+    <GoodsItem title='Joy' second-title='Joy' :pic-one='picOne' :pic-two='picTwo' />
+    <!-- html 中没有数字的概念，所以 template 中要使用数字的话需要使用模版语法 :x='100' -->
+    <!-- 传递布尔值的时候也是需要使用模板语法 v-bind 但是有省略的写法 比传递一个 show 是 true  默认  :show='true' 简化成 show  -->
+    <GoodsItem second-title='哈哈哈哈' :pic-one='picOne' :pic-two='picTwo'    />
+    <hr>
+    <DataDemo class="data-demo" />
   </div>
 </template>
 
@@ -19,13 +22,15 @@ import FirstComponent from './components/FirstComponent.vue'
 import GoodsItem from './components/GoodsItem.vue'
 import picOne from './assets/1.jpg'
 import picTwo from './assets/2.jpg'
+import DataDemo from './components/DataDemo.vue'
 
 export default {
   name: 'App',
   components:{
     HelloWorld,
     FirstComponent,
-    GoodsItem
+    GoodsItem,
+    DataDemo
   },
   data(){
     return {
@@ -45,7 +50,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.box  {
+#app > .box1  {
   width: 200px;
   height: 200px;
   background-image: url('./assets/11.jpg');
