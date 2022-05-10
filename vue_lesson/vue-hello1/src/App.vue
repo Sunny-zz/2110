@@ -13,6 +13,14 @@
     <GoodsItem second-title='哈哈哈哈' :pic-one='picOne' :pic-two='picTwo'    />
     <hr>
     <DataDemo class="data-demo" />
+    <hr>
+    <BannerDemo />
+    <hr>
+    <EventDemo />
+    <hr>
+    <conditional-demo v-show="false" />
+    <hr>
+    <list-demo />
   </div>
 </template>
 
@@ -23,6 +31,10 @@ import GoodsItem from './components/GoodsItem.vue'
 import picOne from './assets/1.jpg'
 import picTwo from './assets/2.jpg'
 import DataDemo from './components/DataDemo.vue'
+import BannerDemo from './components/BannerDemo.vue'
+import EventDemo from './components/EventDemo.vue'
+import ConditionalDemo from './components/conditional-demo.vue'
+import ListDemo from './components/list-demo.vue'
 
 export default {
   name: 'App',
@@ -30,7 +42,11 @@ export default {
     HelloWorld,
     FirstComponent,
     GoodsItem,
-    DataDemo
+    DataDemo,
+    BannerDemo,
+    EventDemo,
+    ConditionalDemo,
+    ListDemo
   },
   data(){
     return {
