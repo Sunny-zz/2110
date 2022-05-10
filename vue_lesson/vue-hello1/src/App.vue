@@ -21,6 +21,8 @@
     <conditional-demo v-show="false" />
     <hr>
     <list-demo />
+    <hr>
+    <FormDemo />
   </div>
 </template>
 
@@ -35,6 +37,7 @@ import BannerDemo from './components/BannerDemo.vue'
 import EventDemo from './components/EventDemo.vue'
 import ConditionalDemo from './components/conditional-demo.vue'
 import ListDemo from './components/list-demo.vue'
+import FormDemo from './components/FormDemo.vue'
 
 export default {
   name: 'App',
@@ -46,7 +49,8 @@ export default {
     BannerDemo,
     EventDemo,
     ConditionalDemo,
-    ListDemo
+    ListDemo,
+    FormDemo
   },
   data(){
     return {
