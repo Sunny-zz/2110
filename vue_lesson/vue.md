@@ -186,16 +186,15 @@ v-show 也可以在组件标签上
 ### 表单的输入绑定
 vue 中用户在表单中输入内容也认为是页面发生改变，那么这个改变就需要使用 data 去控制。
 
-input:text 以及 textarea 的数据绑定
+input:text 以及 textarea 的数据绑定  
 
+### 自定义事件( 特殊的 props)
+就是当你想要给子组件传递方法(函数)的时候，可以使用 自定义事件方式向下传递
 
 ### vue 中的各种数据在 tempalte 中 和 script 如何使用
 数据包括 data   props  methods  
 在 tempalte 中直接使用其名字即可
 
 在 script 中需要使用 this.名字 获取。需要注意 this 的指向
-
-
-
 
 

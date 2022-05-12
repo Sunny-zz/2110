@@ -23,6 +23,8 @@
     <list-demo />
     <hr>
     <FormDemo />
+    <hr>
+    <CustomEvent />
   </div>
 </template>
 
@@ -38,6 +40,7 @@ import EventDemo from './components/EventDemo.vue'
 import ConditionalDemo from './components/conditional-demo.vue'
 import ListDemo from './components/list-demo.vue'
 import FormDemo from './components/FormDemo.vue'
+import CustomEvent from './components/CustomEvent.vue'
 
 export default {
   name: 'App',
@@ -50,7 +53,8 @@ export default {
     EventDemo,
     ConditionalDemo,
     ListDemo,
-    FormDemo
+    FormDemo,
+    CustomEvent
   },
   data(){
     return {
