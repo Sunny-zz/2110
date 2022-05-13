@@ -1,14 +1,20 @@
 <template>
   <div id="app">
-    <ComputedDemo />
+    <!-- <ComputedDemo />
+    <hr>
+    <WatchDemo /> -->
+    <CommentDemo />
   </div>
 </template>
 
 <script>
-import ComputedDemo from './components/computedAndWatch/ComputedDemo.vue'
+import CommentDemo from './components/CommentDemo/CommentDemo.vue'
+// import ComputedDemo from './components/computedAndWatch/ComputedDemo.vue'
+// import WatchDemo from './components/computedAndWatch/WatchDemo.vue'
 
 export default {
-  components: { ComputedDemo },
+  components: { CommentDemo },
+  // components: { ComputedDemo, WatchDemo },
   name: 'App'
 }
 </script>

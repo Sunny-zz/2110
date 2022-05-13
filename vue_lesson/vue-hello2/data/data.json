@@ -1,0 +1,34 @@
+{
+  "comments": [
+    {
+      "id": "yhy7t7y",
+      "author": {
+        "username": "用户12312",
+        "avatar_url": "https://img2.baidu.com/it/u=4290982249,3925173898&fm=253&fmt=auto&app=138&f=PNG?w=200&h=200"
+      },
+      "likes_count": 10,
+      "reply_count": 3,
+      "commentText": "qwdqwe87686"
+    },
+    {
+      "id": "dwq1123",
+      "author": {
+        "username": "哈哈哈",
+        "avatar_url": "https://img2.baidu.com/it/u=2059292981,3255805850&fm=253&fmt=auto&app=138&f=JPEG?w=200&h=200"
+      },
+      "likes_count": 0,
+      "reply_count": 0,
+      "commentText": "234werwwtwe e eh  "
+    },
+    {
+      "id": "drf5623",
+      "author": {
+        "username": "啦啦啦",
+        "avatar_url": "https://img1.baidu.com/it/u=4029537769,3477989922&fm=253&fmt=auto&app=138&f=JPEG?w=200&h=200"
+      },
+      "likes_count": 1,
+      "reply_count": 0,
+      "commentText": "sads das d rwr 3432 "
+    }
+  ]
+}
