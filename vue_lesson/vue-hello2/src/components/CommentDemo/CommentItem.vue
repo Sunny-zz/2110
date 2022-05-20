@@ -15,6 +15,19 @@
 </template>
 
 <script>
+// 删除评论功能
+// 地址   http://localhost:3008/comments/:id   
+// 方法   delete
+// 参数   无
+// 返回值 无 
+
+
+// 评论点赞
+// 地址   http://localhost:3008/comments/:id 
+// 方法   patch
+// 参数   需要修改的内容例如   {likes_count: 10, isLiked: true}
+// 返回值 修改后的评论对象
+
 export default {
   props: ['author', 'commentText', "likes_count", "reply_count", "id"],
   methods: {

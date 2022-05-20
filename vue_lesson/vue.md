@@ -231,3 +231,24 @@ $emit('xx', 参数)
 - beforeDestory
 - destory
 
+
+
+
+vue 组件的生命周期
+
+同步函数
+
+初始渲染
+beforeCreate
+created  修改 data    异步请求修改data
+beforeMount
+mounted  渲染完毕    获取真实 dom
+
+更新    data 的变化
+beforeUpdate
+updated 
+
+
+卸载    并不是组件内的某些元素的消失，而是整个组件的消失(不是样式消失)
+beforeDestory
+destoryed

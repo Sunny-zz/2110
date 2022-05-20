@@ -11,9 +11,8 @@
           v-for="comment in comments"
           :key="comment.id"
           v-bind="comment"
-          @del='del'
-          @like='like'
-
+          @del="del"
+          @like="like"
         />
       </div>
       <div v-else>稍等一下...</div>
@@ -56,8 +55,11 @@ export default {
       const commentText = this.commentText;
       if (commentText) {
         // 添加评论
+
+        // 首先将填好的内容做检验(忽略)
+        // 向后端发送请求
+        // 请求成功根据后端返回的数据更新前端
         const commentObj = {
-          id: new Date().getTime().toString(),
           author: {
             username: "用户12312",
             avatar_url:
@@ -65,36 +67,44 @@ export default {
           },
           likes_count: 0,
           reply_count: 0,
-          commentText
-        }
+          commentText,
+          isLiked: false,
+        };
 
-        this.comments.push(commentObj)
-
-        // 添加评论成之后需要清空评论内容
-
-        this.commentText = ''
-
+        // 发请求
+        // 后端提供信息   地址  方法  参数  返回值
+        axios.post("http://localhost:3008/comments", commentObj).then((res) => {
+          // console.log(res.data);
+          this.comments.push(res.data);
+          // 添加评论成功之后需要清空评论内容
+          this.commentText = "";
+        });
       } else {
         console.log("请输入有效内容");
       }
     },
     // 删除评论
-    del(id){
+    del(id) {
       // 数组中删除一个元素  根据 id 去删除
-      // [{id: 1},{id: 2},{id: 3}]  删除id3 
-      this.comments = this.comments.filter(ele => ele.id !== id) 
-      
+      // [{id: 1},{id: 2},{id: 3}]  删除id3
+      axios.delete(`http://localhost:3008/comments/${id}`).then(() => {
+        this.comments = this.comments.filter((ele) => ele.id !== id);
+      })
     },
-    // 评论点赞 
-    like(id){
+    // 评论点赞
+    like(id) {
       // [{id: 1, likes: 10, isLiked: false},{id: 2, likes: 9, isLiked: false},{id: 3, likes: 8, isLiked: false}]
       // 3
       // 找到 id 为 3 的 修改 isLiked 为相反的值，然后根据 isLiked 修改 likes
-      const comment = this.comments.find(ele => ele.id === id)
-      comment.isLiked = !comment.isLiked
-      // 现在 isLiked 是 true 的话，用户执行的是点赞操作，否则相反 
-      comment.isLiked ? comment.likes_count++ : comment.likes_count--
-    }
+      let comment = this.comments.find((ele) => ele.id === id);
+
+      axios.patch(`http://localhost:3008/comments/${id}`, {likes_count: comment.isLiked ? comment.likes_count - 1 : comment.likes_count + 1, isLiked: !comment.isLiked }).then(res => {
+        // console.log(res.data)
+        comment.likes_count = res.data.likes_count
+        comment.isLiked = res.data.isLiked
+      })
+      
+    },
   },
 };
 </script>

@@ -4,28 +4,30 @@
     <hr>
     <WatchDemo /> -->
     <CommentDemo />
-    <hr>
-    <button @click="show = !show">修改 show</button>
-    <LifeCircleDemo v-if="show" />
+    <hr />
+    <!-- <button @click="show = !show">修改 show</button>
+    <LifeCircleDemo v-if="show" /> -->
   </div>
 </template>
 
 <script>
-import CommentDemo from './components/CommentDemo/CommentDemo.vue'
-import LifeCircleDemo from './components/ComponentLifeCircle/LifeCircleDemo.vue'
+import CommentDemo from "./components/CommentDemo/CommentDemo.vue";
+// import LifeCircleDemo from './components/ComponentLifeCircle/LifeCircleDemo.vue'
 // import ComputedDemo from './components/computedAndWatch/ComputedDemo.vue'
 // import WatchDemo from './components/computedAndWatch/WatchDemo.vue'
 
 export default {
-  components: { CommentDemo, LifeCircleDemo },
-  // components: { ComputedDemo, WatchDemo },
-  name: 'App',
+  components: {
+    CommentDemo,
+    // LifeCircleDemo
+  },
+  name: "App",
   data() {
     return {
-      show: true
-    }
+      show: true,
+    };
   },
-}
+};
 </script>
 
 <style>
@@ -33,3 +35,6 @@ export default {
   margin-left: 60px;
 }
 </style>
+
+
+
