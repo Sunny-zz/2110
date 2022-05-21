@@ -103,7 +103,6 @@ export default {
         comment.likes_count = res.data.likes_count
         comment.isLiked = res.data.isLiked
       })
-      
     },
   },
 };

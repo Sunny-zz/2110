@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* flex 布局 */
+    /* 将元素分成两大类别   容器   项目   */
+    /* 容器   display: flex; 的元素 */
+    /* 容器的规则 */
+    /* 1. 容器拥有轴线  */
+    /* 轴线分为 主轴 和 交叉轴(副轴)  容器的项目按照主轴线的的方向排列*/
+    /* 2. 容器内的项目是不能超出容器的，超出的话项目会自动等比缩小，默认项目也不会换行(轴线只有一条) */
+  
+    /* 容器的样式 */
+    /* 1. flex-direction   修改主轴线方向    row默认值 | row-reverse | column | column-reverse   */
+    /* 2. flex-wrap 项目的换行   nowrap默认 | wrap | wrap-reverse*/
+    /* 3. flex-flow  上面两个样式的简写   flex-flow: row wrap;  主轴线横向 允许换行  */
+    /* 4. justify-content 控制项目在主轴线上的对齐方式  flex-start默认 | flex-end | center | space-between | space-around;*/
+    /* 5. align-items 项目在交叉轴上如何对齐  flex-start默认 | flex-end | center | baseline | stretch; */
+    /* 6. align-content 定义了多根轴线的对齐方式。 容器副轴方向上有剩余空间的话可以使用该属性控制 多个副轴的对齐方式  flex-start | flex-end | center | space-between | space-around | stretch;*/
+
+    /* 项目   容器的子元素 */
+    /* 项目有些默认的样式 */
+    /* 1. 项目的排列顺序默认  从左到右  横向排列  可以使用容器的 flex-direction 修改 */
+    /* 2. 项目自动会变成块元素 */
+    /* 3. 项目的交叉轴方向上如果没有设置大小，默认会自动根容器的交叉轴方向上的大小一样,如果容器控制了项目在交叉轴的对齐方式，那么项目的交叉轴方向上的大小就和项目的内容一致 */
+    /* 项目的样式 */
+    /* 1. order 规定项目的排列顺序  数值越小，排列越靠前，默认为0，   值是一个数字 */
+    /* 2. flex-grow 规定项目的放大比例（剩余空间的分配） 一般写成 0 或 1  0就是不放大    1 是放大沾满剩余空间。 也可以写成其他的数字那么会按照数值的大小等比例方法 */ 
+    /* 3. flex-shrink 规定项目的缩小比例 一般写成 0 或 1.  0 是不缩小，即使空间不够也不缩小。   1 是缩小 等比缩小 */
+    /* 4. align-self  规定单个项目可以与其他项目在交叉轴上不一样的对齐方式 */
+    .box{
+      margin: 0 auto;
+      width: 600px;
+      height: 600px;
+      border: 2px solid #ccc;
+      padding: 40px 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      /* align-content: space-between; */
+    }
+
+    .box .small-box{
+      width: 130px;
+      height: 100px;
+      background-color: #ccc;
+      text-align: center;
+      line-height: 100px;
+      font-size: 30px;
+    }
+    .box .empty {
+      width: 130px;
+      height: 1px;
+      opacity: 0;
+    }
+    .demo {
+      margin: 30px auto;
+      width: 300px;
+      height: 300px;
+      border: 1px solid red;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .demo1 , .demo2, .demo3 ,.demo4,.demo5 {
+      width: 50px;
+      background-color: #ccc;
+    }
+    .demo1 {
+      /* order: 2; */
+      /* flex-grow: 1; */
+      /* flex-shrink: 0; */
+    }
+    .demo2 {
+      /* order: 1; */
+      /* flex-grow: 3; */
+    }
+    .demo3 {
+      /* order: 4; */
+      align-self: flex-start;
+    }
+    .demo4 {
+      /* order: 5; */
+    } 
+    .demo5 {
+      /* order: 3; */
+      align-self: flex-end;
+    }
+  </style>
+</head>
+<body>
+  <!-- flex 布局 -->
+  <!-- 禁止使用 float  clear  -->
+  <div class="box">
+    <span class="box1 small-box">1</span>
+    <span class="box2 small-box">2</span>
+    <span class="box3 small-box">3</span>
+    <span class="box4 small-box">4</span>
+    <span class="box4 small-box">5</span>
+    <span class="box4 small-box">6</span>
+    <span class="box4 small-box">7</span>
+    <span class="box4 small-box">8</span>
+    <span class="box4 small-box">9</span>
+    <span class="empty"></span>
+    <span class="empty"></span>
+    <span class="empty"></span>
+  </div>
+  <div class="demo">
+    <div class="demo1">11111</div>
+    <div class="demo2">22222</div>
+    <div class="demo3">33333</div>
+    <div class="demo4">44444</div>
+    <div class="demo5">55555</div>
+  </div>
+</body>
+</html>

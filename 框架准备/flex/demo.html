@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      /* box-sizing: border-box; */
+    }
+    .wrap {
+      width: 100vw;
+      /* height: 100vh; */
+      /* display: flex; */
+    }
+    /* nav{
+      width: 300px;
+      height: 100%;
+      background-color: #ccc;
+      flex-shrink: 0;
+    }
+    main {
+      flex-grow: 1;
+      background-color: #00b3d4;
+    } */
+    
+    .box{
+      margin: 0 auto;
+      width: 500px;
+      height: 500px;
+      background-color: #ccc;
+      /* display: flex;
+      justify-content: center;
+      align-items: center; */
+      /* position: relative; */
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .box-inner{
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      /* position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto; */
+      display: inline-block;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- <nav></nav>
+    <main>
+      123213ikjhgdasjdg ajksgd asgh d 
+    </main> -->
+
+    <div class="box">
+      <div class="box-inner"></div>
+      <!-- <div class="box-inner"></div> -->
+    </div>
+  </div>
+</body>
+</html>
