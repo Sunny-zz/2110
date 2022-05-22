@@ -232,23 +232,11 @@ $emit('xx', 参数)
 - destory
 
 
+### vue 组件间的交互
+父组件传递数据给子组件：  props  自定义事件        
+子组件传数据给父组件：借助函数(父组件传递的)参数向父组件传值
+兄弟组件： 跟父组件交互间接实现兄弟组件之间的交互         （子组件的数据放到父组件中）
 
 
-vue 组件的生命周期
-
-同步函数
-
-初始渲染
-beforeCreate
-created  修改 data    异步请求修改data
-beforeMount
-mounted  渲染完毕    获取真实 dom
-
-更新    data 的变化
-beforeUpdate
-updated 
-
-
-卸载    并不是组件内的某些元素的消失，而是整个组件的消失(不是样式消失)
-beforeDestory
-destoryed
+### ref
+ref 用来获取标签的真实 dom， 还可以设置在组件上，用于获取组件
