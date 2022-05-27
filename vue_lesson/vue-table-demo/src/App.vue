@@ -1,13 +1,16 @@
 <template>
   <div>
-    <SearchDemo />
+    <!-- <SearchDemo /> -->
+    <TableDemo />
   </div>
 </template>
 
 <script>
-import SearchDemo from './components/SeacrDemo/SearchDemo.vue'
+import TableDemo from './components/TableDemo/TableDemo.vue'
+// import SearchDemo from './components/SeacrDemo/SearchDemo.vue'
 export default {
-  components: { SearchDemo },
+  components: { TableDemo },
+  // components: { SearchDemo },
 }
 </script>
 

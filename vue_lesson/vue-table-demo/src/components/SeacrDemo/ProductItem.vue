@@ -1,5 +1,5 @@
 <template>
-  <div class="product-item">
+  <div :class="['product-item', {'no-stocked': !stocked}]">
     <span>{{name}}</span>
     <span>{{price}}</span>
   </div>
@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  props: ["name", "price"]
+  props: ["name", "price","stocked"]
 }
 </script>
 
@@ -20,5 +20,8 @@ export default {
 }
 .product-item span:nth-child(2){
   width: 60%;
+}
+.product-item.no-stocked{
+  color: red;
 }
 </style>

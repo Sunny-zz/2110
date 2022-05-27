@@ -5,9 +5,15 @@
       <span>Price</span>
     </div>
     
-    <template v-for="product in products">
-      <ProductTitle :key="product.name" :title="product.category" />
-      <ProductItem v-bind="product" :key="product.name"/>
+    <!-- <template v-for="(product, index) in products">
+      <ProductTitle v-if="index === products.findIndex(ele => ele.category === product.category)" :key="product.name" :title="product.category" />
+      <ProductItem v-bind="product" :key="product.name + product.price"/>
+    </template> -->
+    <!-- [{c: 'g', list:[]}] -->
+    <template v-for="item in showProducts">
+      <ProductTitle :key="item.category" :title="item.category" />
+      <!-- list -->
+      <ProductItem v-for="product in item.list" :key="product.name" v-bind="product" />
     </template>
   </div>
 </template>
@@ -15,9 +21,10 @@
 <script>
 import ProductItem from './ProductItem.vue'
 import ProductTitle from './ProductTitle.vue'
+
 export default {
   components: { ProductTitle, ProductItem },
-  props: ['products']
+  props: ['showProducts']
 }
 </script>
 
