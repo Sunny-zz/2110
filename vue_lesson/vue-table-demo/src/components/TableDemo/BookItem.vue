@@ -1,14 +1,14 @@
 <template>
   <tr>
     <td>{{index+ 1}}</td>
-    <td>{{time}}</td>
-    <td>{{title}}</td>
+    <td class="time">{{time}}</td>
+    <td class="title">{{title}}</td>
     <td>{{author}}</td>
     <td>
       <span v-for="number in importance" class="icon-xingxing iconfont importance" :key="number"></span>
     </td>
     <td>{{visit_count}}</td>
-    <td>
+    <td class="action">
       <button>编辑</button>
       <button @click="del">删除</button>
     </td>
@@ -33,5 +33,8 @@ export default {
 <style>
 .importance{
   font-size: 20px;
+}
+.action{
+  width: 88px;
 }
 </style>
