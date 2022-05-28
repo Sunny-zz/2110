@@ -7,14 +7,14 @@
         type="text"
         placeholder="标题"
       />
-      <select v-model.number='importance'>
+      <select v-model.number="importance">
         <option value="0"></option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
       </select>
       <button @click="searchBooks">搜索</button>
-      <button @click="open">添加</button>
+      <button @click="open('Create')">添加</button>
     </div>
     <div class="loading" v-if="isLoading">等待。。。</div>
     <table v-if="books.length">
@@ -35,26 +35,88 @@
           v-for="(book, index) in books"
           :key="book.id"
           v-bind="{ ...book, index }"
+          @open="open"
+          @changeNewBook="changeNewBook"
         />
       </tbody>
     </table>
     <div v-else-if="!books.length && !isLoading">暂无数据</div>
-    <DialogDemo @close='close' :visibility="visibility" />
+    <DialogDemo
+      @close="close"
+      :visibility="visibility"
+      @onOk="onOk"
+      :dialogTitle="dialogTitle"
+    >
+      <!-- 传递插槽给子组件 -->
+      <div class="time">
+        <label for="time">时间</label>
+        <input v-model="newBook.time" type="datetime-local" name="" id="time" />
+      </div>
+      <br />
+      <br />
+      <div class="title">
+        <label for="title">标题</label>
+        <input v-model="newBook.title" type="text" name="" id="title" />
+      </div>
+      <br />
+      <br />
+      <div class="author">
+        <label for="author">作者</label>
+        <input v-model="newBook.author" type="text" name="" id="author" />
+      </div>
+      <br />
+      <br />
+      <div class="importance">
+        <label for="title">重要性</label>
+        <div>
+          <span
+            v-for="i in 3"
+            :key="i"
+            :class="[
+              'iconfont',
+              importanceActiveIndex >= i ? 'icon-xingxing' : 'icon-star',
+              { 'all-select': importanceActiveIndex === 3 },
+            ]"
+            @mouseenter="importanceActiveIndex = i"
+            @mouseleave="importanceActiveIndex = newBook.importance"
+            @click="newBook.importance = i"
+          ></span>
+        </div>
+      </div>
+      <br />
+      <br />
+    </DialogDemo>
   </div>
 </template>
 
 <script>
 import BookItem from "./BookItem.vue";
-import DialogDemo from './DialogDemo.vue';
+import DialogDemo from "./DialogDemo.vue";
 export default {
   components: { BookItem, DialogDemo },
   data() {
     return {
+      // 书籍数组
       books: [],
-      searchTitle: "",
+      // 得等待效果
       isLoading: false,
+      // 搜索的重要性
       importance: 1,
-      visibility: false 
+      // 搜索的标题
+      searchTitle: "",
+      // 弹出的出现消失
+      visibility: false,
+      // 新书籍对象
+      newBook: {
+        title: "",
+        time: "",
+        importance: 1,
+        author: ""
+      },
+      // 重要性的划过索引
+      importanceActiveIndex: 1,
+      // 对话框的标题
+      dialogTitle: "默认标题",
     };
   },
   async created() {
@@ -88,17 +150,77 @@ export default {
       const { searchTitle, importance } = this;
       // 发请求
       this.isLoading = true;
-      const queryStr = importance === 0 ? `?title_like=${searchTitle}` : `?title_like=${searchTitle}&importance=${importance}`
-      const books = await this.$http.get(`/books${queryStr}`) 
+      const queryStr =
+        importance === 0
+          ? `?title_like=${searchTitle}`
+          : `?title_like=${searchTitle}&importance=${importance}`;
+      const books = await this.$http.get(`/books${queryStr}`);
       this.books = books;
       this.isLoading = false;
     },
-    open(){
-      this.visibility = true
+
+    open(type) {
+      this.visibility = true;
+      this.dialogTitle = type;
     },
-    close(){
-      this.visibility = false
-    }
+    close() {
+      this.visibility = false;
+      // 因为对话弹窗有多个功能(添加 和 修改)，添加取消或者修改取消之后，或者完成之后 对话框的状态(newBook 以及 importanceActiveIndex)需要还原
+      this.newBook = {
+        title: "",
+        time: "",
+        importance: 1,
+        author: "",
+      };
+      this.importanceActiveIndex = 1;
+      // console.log('关闭成功')
+    },
+    // 确定按钮事件
+    // 添加功能
+    async onOk() {
+      // console.log(this.newBook)
+      // 检验 newBook   循环数组去查
+      const { newBook, dialogTitle } = this;
+      // 我们会根据 dialogTitle 来区分什么时候是添加或者编辑
+      if (dialogTitle === "Create") {
+        if (newBook.title && newBook.time && newBook.author) {
+          // 发请求给后端更新数据
+          // 地址  /books
+          // 方法  post
+          // 参数  书籍对象(无 id 的)
+          // 返回值 添加好的书籍对象(带 id 的)
+          // 更新前端
+          const res = await this.$http.post("/books", {
+            ...newBook,
+            visit_count: 0,
+          });
+          this.books.push(res);
+          // console.log('添加成功')
+          
+        }
+      } else {
+        // console.log('编辑')
+        // 发请求给后端编辑书籍数据
+        // 地址  /books/:id
+        // 方法  patch
+        // 参数  书籍对象（要修改的属性）
+        // 返回值 修改好书籍对象(带 id 的)
+        // 更新前端
+        // 当没有修改的时候是不需要发送编辑请求的
+        // 获取原来的 book  然后跟 newBook 
+        const res = await this.$http.patch("/books/" + newBook.id , newBook);
+
+        this.books.splice(this.books.findIndex(book => book.id === res.id), 1, res)
+      }
+
+      this.close();
+    },
+    changeNewBook(book) {
+      this.newBook = book;
+      this.importanceActiveIndex = book.importance;
+    },
+
+    // 添加功能做完之后。 做编辑功能也是 onOk 事件
   },
 };
 </script>
@@ -131,5 +253,8 @@ export default {
   font-size: 40px;
   text-align: center;
   position: absolute;
+}
+.all-select {
+  color: rgb(240, 230, 44);
 }
 </style>

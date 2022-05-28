@@ -1,15 +1,19 @@
 <template>
   <tr>
-    <td>{{index+ 1}}</td>
-    <td class="time">{{time}}</td>
-    <td class="title">{{title}}</td>
-    <td>{{author}}</td>
+    <td>{{ index + 1 }}</td>
+    <td class="time">{{ time }}</td>
+    <td class="title">{{ title }}</td>
+    <td>{{ author }}</td>
     <td>
-      <span v-for="number in importance" class="icon-xingxing iconfont importance" :key="number"></span>
+      <span
+        v-for="number in importance"
+        class="icon-xingxing iconfont importance"
+        :key="number"
+      ></span>
     </td>
-    <td>{{visit_count}}</td>
+    <td>{{ visit_count }}</td>
     <td class="action">
-      <button>编辑</button>
+      <button @click="edit">编辑</button>
       <button @click="del">删除</button>
     </td>
   </tr>
@@ -17,24 +21,43 @@
 
 <script>
 export default {
-  props: ['time','title','author','importance','visit_count','index', 'id'],
+  props: [
+    "time",
+    "title",
+    "author",
+    "importance",
+    "visit_count",
+    "index",
+    "id",
+  ],
   methods: {
     del() {
-      const n = confirm('是否真的要删除吗？')
-      if(n) {
-        this.$emit('delBook' , this.id)
+      const n = confirm("是否真的要删除吗？");
+      if (n) {
+        this.$emit("delBook", this.id);
       }
-    }
+    },
+    edit() {
+      const { id, time, title, author, importance, visit_count } = this;
+      this.$emit("open", 'Edit');
+      this.$emit("changeNewBook", {
+        id,
+        time,
+        title,
+        author,
+        importance,
+        visit_count,
+      });
+    },
   },
-}
-
+};
 </script>
 
 <style>
-.importance{
+.importance {
   font-size: 20px;
 }
-.action{
+.action {
   width: 88px;
 }
 </style>
