@@ -92,6 +92,8 @@
 <script>
 import BookItem from "./BookItem.vue";
 import DialogDemo from "./DialogDemo.vue";
+// 不需要整个导入 lodash 直接到需要的方法即可
+import isEqual from 'lodash/isEqual'
 export default {
   components: { BookItem, DialogDemo },
   data() {
@@ -111,7 +113,7 @@ export default {
         title: "",
         time: "",
         importance: 1,
-        author: ""
+        author: "",
       },
       // 重要性的划过索引
       importanceActiveIndex: 1,
@@ -196,7 +198,6 @@ export default {
           });
           this.books.push(res);
           // console.log('添加成功')
-          
         }
       } else {
         // console.log('编辑')
@@ -207,22 +208,63 @@ export default {
         // 返回值 修改好书籍对象(带 id 的)
         // 更新前端
         // 当没有修改的时候是不需要发送编辑请求的
-        // 获取原来的 book  然后跟 newBook 
-        const res = await this.$http.patch("/books/" + newBook.id , newBook);
-
-        this.books.splice(this.books.findIndex(book => book.id === res.id), 1, res)
+        // 获取原来的 book  然后跟 newBook
+        const { id } = newBook;
+        const { books } = this;
+        const oldBook = books.find((book) => book.id === id);
+        if (!this.compareObjIsEqual(oldBook, newBook)) {
+          const res = await this.$http.patch("/books/" + id, newBook);
+          books.splice(
+            books.findIndex((book) => book.id === res.id),
+            1,
+            res
+          );
+        }
       }
-
       this.close();
     },
     changeNewBook(book) {
       this.newBook = book;
       this.importanceActiveIndex = book.importance;
     },
-
-    // 添加功能做完之后。 做编辑功能也是 onOk 事件
+    compareObjIsEqual(obj, otherObj) {
+      // const objPropertiesNum = Object.keys(obj).length;
+      // const otherObjPropertiesNum = Object.keys(otherObj).length;
+      // if (objPropertiesNum !== otherObjPropertiesNum) {
+      //   return false;
+      // }
+      // for (const key in obj) {
+      //   if (obj[key] !== otherObj[key]) {
+      //     return false;
+      //   }
+      // }
+      // return true;
+      // return JSON.stringify(obj) === JSON.stringify(otherObj)
+      return isEqual(obj, otherObj)
+    },
   },
 };
+
+// const obj1 = { a: 10, b: 20, c: 30 };
+// const obj2 = { a: 10, b: 20 };
+// const a = Object.keys(obj2)
+// const b = Object.keys(obj1)
+// console.log(a)
+// console.log(b)
+// let isEqual = true;
+// if(a.length !== b.length){
+//   isEqual = false
+// }
+
+// for (const key in obj1) {
+//   if (obj2[key] !== undefined) {
+//     if (obj1[key] !== obj2[key]) {
+//       isEqual = false;
+//       break;
+//     }
+//   }
+// }
+// console.log(isEqual);
 </script>
 
 <style>

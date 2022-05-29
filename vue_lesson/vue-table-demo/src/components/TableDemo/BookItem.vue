@@ -38,15 +38,15 @@ export default {
       }
     },
     edit() {
-      const { id, time, title, author, importance, visit_count } = this;
-      this.$emit("open", 'Edit');
+      const { time, title, author, importance, visit_count, id } = this;
+      this.$emit("open", "Edit");
       this.$emit("changeNewBook", {
-        id,
         time,
         title,
         author,
         importance,
         visit_count,
+        id
       });
     },
   },
