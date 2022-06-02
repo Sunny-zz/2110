@@ -248,3 +248,31 @@ ref 用来获取标签的真实 dom， 还可以设置在组件上，用于获�
 如何全局注册组件
 
 ## 处理边界情况
+
+
+
+## vue 路由   vue-router
+在 vue 项目的单页面(spa)应用中,需要使用路由功能来实现多页面的效果。官方提供了 vue-router 插件来实现。
+
+### 安装
+- 使用 vue ui 创建项目的时候，可以手动选择配置添加上 vue-router。 也可以直接找到插件 vue-router 选择安装。这种方式会修改项目代码，自动添加 vue-router 小案例，适合在初始化项目的时候使用。
+
+- 使用命令行直接安装 vue-router 包 `npm i vue-router` ,需要添加路由的使用在项目中。
+
+
+### 使用
+1. 创建路由页面(并不是创建整个项目的所有页面)， 也就是创建页面组件， 一般选择在根目录新建  views 文件夹 存放页面组件
+2. 在 src 新建 router 文件夹， 文件夹内新建 index.js  用于存放 路由 配置代码,创建路由
+   - 导入路由 类 `import VueRouter from 'vue-router'`, 以及导入 Vue 
+   - 使用 Vue.use(VueRouter) 将 VueRouter 内置的组件制作成全局的
+   - 创建路由数组，是由页面路由对象组成
+   - 创建路由实例(初始化路由)  new VueRouter({配置}) 并导出
+   - 在 main.js 导入创建好的路由,并且添加到 new Vue 配置中
+3. 找到需要展示路由组件的组件，使用 router-view 组件展示路由
+
+### router-link 组件
+- to
+- active-class  
+  页面地址和 router-link 的 to 匹配的时候， 会添加的 class。 默认值是 router-link-active， 匹配默认是包含匹配
+- exact-active-class 
+  页面地址和 router-link 的 to 完全相等给的时候 会添加的 class。默认值是 router-link-exact-active

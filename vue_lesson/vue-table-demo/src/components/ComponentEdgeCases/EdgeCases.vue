@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 ref='title'>处理边界情况</h3>
-    <!-- 1. 访问元素和组件     获取了组件就相当于获取了组件的 this -->
+    <!-- 1. 访问元素和组件   获取了组件就相当于获取了组件的 this -->
     <!-- ref 访问元素和组件  -->
     <!-- $root 访问根组件 -->
     <!-- $parent 访问父组件 -->
@@ -11,7 +11,6 @@
     <!-- $once 添加自定义事件 使用 $emit 接收  -->
     <!-- $off 解除自定义事件 -->
     <!-- 3. 循环引用 (组件递归) -->
-
     <!-- 4. 控制更新 -->
     <BaseButton ref="btn"  text='hello' />
     <!-- <button @click="handleClick">按钮</button> -->
@@ -27,7 +26,6 @@
 import MenuDemo from './MenuDemo.vue'
 export default {
   components: { MenuDemo },
-  
   data() {
     return {
       menuList: [
