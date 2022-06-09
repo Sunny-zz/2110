@@ -1,7 +1,7 @@
 <template>
   <!-- 文章列表组件 -->
   <div class="post-list">
-    <h4>文章列表{{$route.params.type}}</h4>
+    <h4>文章列表</h4>
   </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
       console.log(newValue)
       // 根据不同的 value 发送请求更新 data 页面数据就会发生改变了
     }
-  },
+  }
 }
 </script>
 

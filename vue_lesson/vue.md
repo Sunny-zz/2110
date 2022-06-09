@@ -276,3 +276,13 @@ ref 用来获取标签的真实 dom， 还可以设置在组件上，用于获�
   页面地址和 router-link 的 to 匹配的时候， 会添加的 class。 默认值是 router-link-active， 匹配默认是包含匹配
 - exact-active-class 
   页面地址和 router-link 的 to 完全相等给的时候 会添加的 class。默认值是 router-link-exact-active
+
+
+
+### vue 过滤器
+比如一些数值需要格式化 (千分格式化  保留位数 科学计数法)还有时间的格式化， 如果计算很复杂， 直接写在 template 中不合适， 而且不能使用计算属性(计算属性无法传参)。
+
+使用 vue 提供的过滤器 filter
+分为两种
+- 组件内的过滤器
+- 全局过滤器
