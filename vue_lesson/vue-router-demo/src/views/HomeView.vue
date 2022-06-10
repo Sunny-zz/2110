@@ -3,9 +3,17 @@
     <h3>我是首页</h3>
     <div class="nav">
       <!-- 不管 link 切换到哪种页面， to 的地址都需要写全 -->
-      <router-link to='/recommended'>综合</router-link>
-      <router-link to='/frontend'>前端</router-link>
-      <router-link to='/backend'>后端</router-link>
+
+      <!-- 页面地址是  /  或者  /recomended 的时候都会变色 -->
+      <!-- 当 router-link 的激活变色 默认的 active-class 以及 exact-active-class 不满足的话， 可以动态直接控制 class 属性, 属于额外的控制，之前的 active-class 以及 exact-active-class 可以直接用  -->
+      <router-link
+        :class="$route.path === '/' ? 'active' : ''"
+        active-class="active"
+        to="/recommended"
+        >综合</router-link
+      >
+      <router-link exact-active-class="active" to="/frontend">前端</router-link>
+      <router-link exact-active-class="active" to="/backend">后端</router-link>
     </div>
     <!-- 首页里面有很多二级页面 比如 综合 前端 后端 -->
     <!-- 地址是    -->
@@ -23,11 +31,8 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-
 </style>

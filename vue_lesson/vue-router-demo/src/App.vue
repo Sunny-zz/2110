@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <div class="router-demo">
+  <div class="router-demo">
+    <div>
       <!-- 要实现路由跳转 需要使用路由的内置组件 -->
       <!-- router-link 的 to 是去 路由数组中匹配 path   或者说 to 是相当于改变了页面地址 -->
       <!-- router-link 是一个组件，其实默认就是一个 a 标签， to 就相当于 href -->
-      <router-link exact-active-class="active" to='/'>Home</router-link>
+      <router-link exact-active-class="active" :class="{active: ['/recommended', '/frontend', '/backend'].includes($route.path)}" to='/'>Home</router-link>
       <span>|</span>
       <router-link exact-active-class="active" to='/about'>About</router-link>
     </div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-
+  
 }
 </script>
 

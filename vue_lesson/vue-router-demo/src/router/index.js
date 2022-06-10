@@ -2,6 +2,7 @@ import VueRouter from 'vue-router'
 import Vue from 'vue'
 import HomeView from '../views/HomeView.vue'
 import PostList from '../views/PostList.vue'
+// import PostView from '../views/PostView.vue'
 // import AboutView from '../views/AboutView.vue'
 Vue.use(VueRouter)
 
@@ -20,10 +21,12 @@ const routes = [
   {
     path: '/',
     component: HomeView,
+    
     children: [
       // 当父路由有默认匹配 也就是地址和父路由完全相同的时候，需要展示一个子路由，此时 path 设置成 '' 就是默认展示的子路由
       {
         path: '',
+        name: 'home',
         component: PostList
       },
       {
@@ -36,7 +39,14 @@ const routes = [
     ]
   },
   // 因为子路由 :type  跟  /about 路由冲突了， 所以要将 about 提前
-  
+
+  // 文章详情路由
+  // 动态路由  很多地址都是同一个路由
+  {
+    path: '/post/:id',    //   /post/y7y87yd
+    name: 'post',
+    component: () => import('../views/PostView.vue')
+  }
 ]
 
 // 页面地址会在 routes 路由数组中 path 去匹配对应的页面组件  匹配机制是完全相等, 而且是从上至下，匹配一个就结束
