@@ -1,7 +1,13 @@
 <template>
   <div class="goods-item">
     <div class="radio">
-      <input @change="$emit('updateGoods', id, {isSelected: !isSelected})" :checked="isSelected" type="checkbox" name="" id="" />
+      <input
+        @change="$emit('updateGoods', id, { isSelected: !isSelected })"
+        :checked="isSelected"
+        type="checkbox"
+        name=""
+        id=""
+      />
     </div>
     <div class="info">
       <img :src="img" alt="" />
@@ -14,12 +20,17 @@
     <!-- {{ 参数 | 过滤器1 | 过滤器2}} -->
     <span class="price">¥{{ price | formatValue }}</span>
     <div class="count-wrap">
-      <button :disabled="number === 1" @click="$emit('subNumber', id)">-</button>
-      <input :value="number" type="text" />
-      <button @click="$emit('updateGoods', id, {number: number + 1})">+</button>
+      <button :disabled="number === 1" @click="$emit('subNumber', id)">
+        -
+      </button>
+      <input @blur="handleBlur" ref="input" @input="handleInput" :value="number" type="text" />
+      <button @click="$emit('updateGoods', id, { number: number + 1, isSelected: true })">
+        +
+      </button>
     </div>
-    <span class="total">¥{{ number * price | formatValue }}</span>
-    <button class="del">删除</button>
+
+    <span class="total">¥{{ (number * price) | formatValue }}</span>
+    <button class="del" @click="$emit('delGoods', id)" >删除</button>
   </div>
 </template>
 
@@ -33,6 +44,19 @@ export default {
   //     return value.toFixed(2);
   //   },
   // },
+  methods: {
+    handleInput(e) {
+      // 当用户输入了 非数字 的时候处理
+      const re = /[^\d]/;
+      const key = e.data;
+      if (re.test(key)) {
+        this.$refs.input.value = this.$refs.input.value.replace(key, "");
+      }
+    },
+    handleBlur() {
+      this.$emit('updateGoods', this.id, {number: this.$refs.input.value * 1, isSelected: true})
+    }
+  },
 };
 </script>
 
@@ -61,5 +85,15 @@ export default {
 }
 .count-wrap input {
   width: 30px;
+}
+
+/* chrome */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+/* 火狐浏览器 */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 </style>
