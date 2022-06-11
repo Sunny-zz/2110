@@ -53,7 +53,18 @@ export default {
         .then((res) => {
           const {data} = res
           if(data.length){
-            console.log(data)
+            // 使用 localStorage 或者 sessionStorage 存储用户名
+            // 两个的区别 localStorage 存的内容只要不删除，就一直在浏览器中， sessionStorage 存的内容只要浏览器窗口关闭了就自动消失 换一个窗口没有当前 session
+
+            // 本地存储只能存基础类型(不能存储对象)，需要存储对象的话 将对象转化成 json 串，再存
+            // console.log(data)
+            // sessionStorage.setItem('username', data[0].username)
+
+            sessionStorage.setItem("user", JSON.stringify({
+              username: data[0].username,
+              avatar_url: data[0].avatar_url
+            }))
+            
             this.$router.push('/')
           }else{
             alert('用户名密码不匹配')
@@ -67,7 +78,7 @@ export default {
 // vue 路由和路由之间的交互
 // - 地址栏交互 在后面的组件中使用 $route 或者利用组件传参获取
 // - ajax
-// - 浏览器本地存储   localStorage  sessionStorage
+// - 浏览器本地存储   localStorage  sessionStorage  
 </script>
 
 <style>
