@@ -277,9 +277,25 @@ ref 用来获取标签的真实 dom， 还可以设置在组件上，用于获�
 - exact-active-class 
   页面地址和 router-link 的 to 完全相等给的时候 会添加的 class。默认值是 router-link-exact-active
 
+### 路由基础
 
+- 入门(基础 安装 创建 使用)
+- 动态路由   多个地址展示同一个页面(同一个组件) 主要就是  path 的书写    
+  - 例如   /user/zhangsan    /user/lisi      /user/:username
+- 路由的匹配语法  其实就是当路由是动态路由时  path 的书写(高级的一些写法)   就是限制 path 的动态参数
+  - 用户详情   /user/:userId(\\d+)      :userId 只能是数字 才会匹配
+- 嵌套路由   就是 children 属性
+- 编程式导航   如何在组件中获取路由相关信息   
+  - $route (当前页面路由信息)    获取当前地址  获取动态参数 查询条件
+  - $router 整个路由  路由跳转(非 router-link)  返回上一页  
+- 命名路由  name 属性   router-link 跳转页面的时候可以直接 跳 name 不用 跳 path
+  - 父路由有默认子路由的话 将 name 写在默认子路由上
+- 重定向和别名 
+  - 重定向    用户输入  /a  重定向到 /b
+  - {path: /a , alias: /aa, component: Home}   那么 /a  /aa 都会跳转到对应 Home 页面
+- 路由组件传参 之前路由传参一般是使用动态路由 动态参数， 新增一个  props 属性也可以传参
 
-### vue 过滤器
+## vue 过滤器
 比如一些数值需要格式化 (千分格式化  保留位数 科学计数法)还有时间的格式化， 如果计算很复杂， 直接写在 template 中不合适， 而且不能使用计算属性(计算属性无法传参)。
 
 使用 vue 提供的过滤器 filter

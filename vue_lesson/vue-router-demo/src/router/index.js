@@ -10,6 +10,7 @@ const routes = [
 
   {
     path: '/about',
+    name: 'about',
     // 懒加载 只有在匹配到当前页面时候 才会导入 AboutView   利用的是 import 方法的导入
     component: () => import('../views/AboutView')
   },
