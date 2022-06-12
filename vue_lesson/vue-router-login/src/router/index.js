@@ -22,6 +22,7 @@ const routes = [
   {
     path: '/',
     component: MainView,
+    meta: {auth: false},
     children: [
       // 重定向，访问 about 重定向到 new
       {
@@ -37,13 +38,26 @@ const routes = [
       {
         path: '',
         component: HomeView,
+        meta: {auth: 'vip'},
         children: [
           {
             path: '',
-            component: PostList
+            component: PostList,
+            // 路由组件传参
+            // props 有三种写法
+            // 1. true
+            // 会自动将动态路由参数当作 props 传递给组件
+            // 2. 对象
+            // 会将对象下的属性传递个组件，动态路有参数就不传递了
+            // 3. 函数 参数默认接收当前路由route 返回一个对象
+            // 根据需求返回对象
+
+            props: (route)=> ({a:100, type: route.params.type})
           },
           {
             path: ':type',
+            // props: true 的作用是将动态路由参数当作组件的 props 传递给组件
+            props: (route)=> ({a:100, type: route.params.type}),
             component: PostList
           }
         ]
@@ -73,6 +87,9 @@ router.beforeEach((to, from, next) => {
   // 例如  /login  --->   /      to就是  /  from 就是 /login
   // console.log(to)
   // console.log(from)
+
+  // 可以判断 to.matched 路由记录 获取到 meta 来查看权限，判断是否可以进入当前页面
+
   if (to.path === '/login' || sessionStorage.getItem('user')) {
     next()
   } else {
