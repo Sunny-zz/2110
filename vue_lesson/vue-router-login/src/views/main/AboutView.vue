@@ -32,13 +32,35 @@
     <div>
       <h4>多个元素</h4>
       <button @click="isSave = !isSave">切换编辑或者保存</button>
-      <br>
+      <br />
       <!-- 过渡模式 -->
       <transition name="fade" mode="out-in">
         <!-- 需要给每个元素添加不同给的 key 属性 -->
         <button key="save" v-if="isSave">保存</button>
         <button key="edit" v-else>编辑</button>
       </transition>
+    </div>
+    <hr />
+    <div>
+      <h4>列表过渡</h4>
+      <!-- 需要使用  transition-group 组件实现 -->
+      <button @click="remove">remove</button>
+      <button @click="add">add</button>
+      <button @click="shuffle">随机打乱</button>
+      <div>
+        <!-- 添加删除过渡 -->
+        <!-- <transition-group name="slide">
+          <span style="margin-right: 5px; display: inline-block;" v-for="num in numArr" :key="num">{{
+            num
+          }}</span>
+        </transition-group> -->
+        <!-- 排序过渡 -->
+        <transition-group move-class="flip">
+          <span style="margin-right: 5px; display: inline-block;" v-for="num in numArr" :key="num">{{
+            num
+          }}</span>
+        </transition-group> 
+      </div>
     </div>
   </div>
 </template>
@@ -60,7 +82,37 @@ export default {
     return {
       showText: true,
       isSave: true,
+      numArr: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      nextNum: 10
     };
+  },
+  computed: {
+    randomNum() {
+      return  Math.floor(Math.random() * this.numArr.length)
+    }
+  },
+  methods: {
+    remove() {
+      // 随机删除 
+      this.numArr.splice(this.randomNum, 1)
+    },
+    add(){
+      // 随机添加
+      this.numArr.splice(this.randomNum, 0, this.nextNum)
+      this.nextNum ++
+    },
+    shuffle(){
+      const copyNumArr = [...this.numArr]
+      const len = copyNumArr.length
+      const newNumArr = []
+
+      for (let i = 0; i < len; i++) {
+        const randomNum = Math.floor(Math.random() * copyNumArr.length)
+        newNumArr.push(copyNumArr.splice(randomNum, 1)[0])
+      }
+
+      this.numArr = newNumArr
+    }
   },
 };
 </script>
@@ -121,6 +173,23 @@ export default {
   opacity: 0;
 }
 .x-active {
+  transition: all 1s;
+}
+
+.slide-enter{
+  opacity: 0;
+  transform: translateY(-50px);
+}
+.slide-enter-active , .slide-leave-active{
+  transition: all .5s;
+}
+.slide-leave-to{
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* transition-group 内的元素移动的时候 */
+.flip {
   transition: all 1s;
 }
 </style>
