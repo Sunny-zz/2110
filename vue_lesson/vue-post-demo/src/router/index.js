@@ -3,9 +3,14 @@ import Vue from "vue";
 import HomeView from "../views/HomeView.vue"
 import TopicList from "../views/TopicList.vue"
 import TopicDetail from "../views/TopicDetail.vue"
+import OtherView from "../views/OtherView.vue"
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/other',
+    component: OtherView
+  },
   {
     path: '/',
     component: HomeView,

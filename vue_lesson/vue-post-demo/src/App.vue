@@ -1,6 +1,9 @@
 <template>
   <div>
-    <header></header>
+    
+    <header>
+      <router-link to='/other'>其他</router-link>
+    </header>
     <router-view></router-view>
   </div>
 </template>
