@@ -17,7 +17,7 @@ export default {
   inheritAttrs: false,
   components: { SmallDemo },
   created () {
-    console.log(this.$attrs)
+    // console.log(this.$attrs)
   },
 }
 </script>

@@ -12,6 +12,9 @@ import MidDemo from "./MidDemo.vue";
 // inject 去取
 export default {
   components: { MidDemo },
+  created () {
+    // console.log(this.$parent);
+  },
   // 如果要将 组件的数据提供给后代 那么 provide 需要写成函数返回一个对象
 
   // 如果这个传递下去的数据希望是响应式的，需要将 数据写成函数 返回值形式。 后代组件接收的时候，调用才能得到对应的值

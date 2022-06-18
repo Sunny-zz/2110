@@ -22,13 +22,21 @@
     <hr>
     <p>provide/inject</p>
     <BigDemo />
+    <hr>
+    <p>$attrs  $listeners</p>
+    <!-- 父组件传递给子组件 props 和 自定义事件的时候 -->
+    <AttrDemo msg='hello' :count="100" @fun="fun" @fn="fn" />
+    <hr>
+    <!-- 想要展示内容但是展示的内容和 vue 模板语法冲突的时候 可以使用哪个该指令 对内容不进行编译 -->
+    <span v-pre>{{ this will not be compiled }}</span>
   </div>
 </template>
 
 <script>
+import AttrDemo from './components/AttrDemo.vue'
 import BigDemo from './components/BigDemo.vue'
 export default {
-  components: { BigDemo },
+  components: { BigDemo, AttrDemo },
   data() {
     return {
       show: false,
@@ -38,6 +46,10 @@ export default {
       },
       numArr: [1,2,3]
     }
+  },
+  created () {
+    // console.log(this.$parent);
+    // console.log(this.$children);
   },
   methods: {
     changeShow() {
@@ -68,6 +80,12 @@ export default {
       this.numArr[1] = 4
       // console.log(this.numArr)
       this.$set(this.numArr, 1, 4)
+    },
+    fun(){
+      console.log('自定义事件1')
+    },
+    fn(){
+      console.log('自定义事件2')
     }
   },
 }
