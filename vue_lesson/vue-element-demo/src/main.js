@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './plugins/element'
+import './assets/style.css'
 // 导入所有 组件的样式
 // import 'element-ui/lib/theme-chalk/index.css'
 

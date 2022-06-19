@@ -1,7 +1,12 @@
 <template>
-  <div>
+  <div class="table" v-loading="loading">
     <el-table :data="tableData">
-      <el-table-column type="index" label="序号" width="100"></el-table-column>
+      <el-table-column
+        type="index"
+        label="序号"
+        width="100"
+        :index="indexMethod"
+      ></el-table-column>
       <el-table-column prop="time" label="时间" width="150"> </el-table-column>
       <el-table-column prop="title" label="标题" width="400"> </el-table-column>
       <el-table-column prop="author" label="作者"> </el-table-column>
@@ -29,10 +34,7 @@
                 >删除</el-button
               >
             </el-popconfirm>
-            <el-button
-              @click="edit(row)"
-              type="primary"
-              size="mini"
+            <el-button @click="edit(row)" type="primary" size="mini"
               >编辑</el-button
             >
             <el-button
@@ -45,6 +47,15 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      :current-page.sync="currentPage"
+      :page-sizes="[8]"
+      :page-size="8"
+      background
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="36"
+    >
+    </el-pagination>
 
     <el-dialog title="Edit" :visible.sync="dialogFormVisible">
       <el-form
@@ -84,39 +95,11 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      tableData: [
-        {
-          id: "uhu78",
-          time: "1987-06-26 20:36",
-          title: "Opkrylrb Wvdbprko Fksbjc Zqhjqw Tkfjwm Mtvpoxcbm EwmodfJapan",
-          author: "Sarah",
-          importance: 2,
-          visit_count: 313,
-          status: "published",
-        },
-        {
-          id: "6y7t7",
-          time: "1981-02-04 10:48",
-          title: "Bhkucoqtrv Bkelr Jugifl Ftylpk RupmehqJapan",
-          author: "Larry",
-          importance: 1,
-          visit_count: 844,
-          status: "draft",
-        },
-        {
-          id: "yhgr45",
-          time: "1977-11-22 06:43",
-          title:
-            "Bbt Tltrqbg Wlpihfnh Kkevvzyo Cjhmbwtmg Pxepqpng HylfzjeJapan",
-          author: "Amy",
-          importance: 3,
-          visit_count: 3754,
-          status: "published",
-        },
-      ],
+      tableData: [],
       editBook: null,
       dialogFormVisible: false,
       form: {
@@ -134,7 +117,12 @@ export default {
             message: "请输入标题",
             trigger: "blur",
           },
-          { min: 3, max: 25, message: "长度在 3 到 5 个字符", trigger: "blur" },
+          {
+            min: 3,
+            max: 155,
+            message: "长度在 3 到 155 个字符",
+            trigger: "blur",
+          },
           // 自定义的检验规则
           {
             validator(rule, value, callback) {
@@ -147,6 +135,8 @@ export default {
           },
         ],
       },
+      loading: false,
+      currentPage: 1,
     };
   },
   methods: {
@@ -154,6 +144,11 @@ export default {
       // const book = this.tableData.find( item => item.id === id)
       // console.log(book === row)
       row.status = row.status === "draft" ? "published" : "draft";
+      this.$message({
+        message: "修改成功",
+        type: "success",
+        duration: 1000,
+      });
     },
     delBook(id) {
       this.tableData = this.tableData.filter((item) => item.id !== id);
@@ -168,15 +163,15 @@ export default {
         }
       });
     },
-    edit(book){
-      this.dialogFormVisible = true
-      this.editBook = book
+    edit(book) {
+      this.dialogFormVisible = true;
+      this.editBook = book;
       this.form = {
         title: book.title,
         time: book.time,
         importance: book.importance,
-        status: book.status
-      }
+        status: book.status,
+      };
     },
     confirm(formName) {
       // 先校验输入内容， 把 form 自带的检验直接走一遍，不利用 trigger
@@ -198,10 +193,44 @@ export default {
           )
         ) {
           let book = this.tableData.find((item) => item.id === id);
-          Object.assign(book, this.form)
+          Object.assign(book, this.form);
         }
         this.dialogFormVisible = false;
       });
+    },
+    // async handleCurrentChange(num) {
+    //   this.loading = true
+    //   const res = await axios.get(
+    //     `http://localhost:3008/books?_page=${num}&_limit=8`
+    //   );
+    //   this.loading = false
+    //   this.tableData = res.data;
+    // },
+    indexMethod(index) {
+      return 8 * (this.currentPage - 1) + (index + 1);
+    },
+  },
+  // async created() {
+  //   // this.loading = true
+  //   let lo = this.$loading.service({
+  //     target: '.table'
+  //   })
+  //   const res = await axios.get("http://localhost:3008/books?_page=1&_limit=8");
+  //   // this.loading = false
+  //   lo.close()
+  //   this.tableData = res.data;
+  // },
+  watch: {
+    currentPage: {
+      async handler(value) {
+        this.loading = true;
+        const res = await axios.get(
+          `http://localhost:3008/books?_page=${value}&_limit=8`
+        );
+        this.loading = false;
+        this.tableData = res.data;
+      },
+      immediate: true,
     },
   },
 };

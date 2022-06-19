@@ -19,14 +19,18 @@
     <div>{{book}}</div>
     <hr>
     <TableDemo  />
+    <hr>
+    <MenuDemo />
   </div>
 </template>
 
 <script>
+import MenuDemo from './components/MenuDemo.vue';
+
 import TableDemo from './components/TableDemo.vue';
 import TestDemo from "./components/TestDemo.vue";
 export default {
-  components: { TestDemo, TableDemo },
+  components: { TestDemo, TableDemo, MenuDemo},
   data() {
     return {
       isLoading: false,
