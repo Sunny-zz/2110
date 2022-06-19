@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { Button, Rate, Table, TableColumn, Tag, Popconfirm, Popover} from 'element-ui';
+import { Button, Rate, Table, TableColumn, Tag, Popconfirm, Popover, Form, FormItem, Input, Select, Option, DatePicker, Dialog} from 'element-ui';
 
 // Vue.component(Button.name, Button);
 
@@ -10,3 +10,13 @@ Vue.use(TableColumn)
 Vue.use(Tag)
 Vue.use(Popconfirm)
 Vue.use(Popover)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Input)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(DatePicker)
+Vue.use(Dialog)
+
+
+

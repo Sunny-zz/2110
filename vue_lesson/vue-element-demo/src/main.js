@@ -23,3 +23,20 @@ new Vue({
     // use(ElementUi)
 
     // b. 按需引入
+
+
+
+
+
+
+
+
+    // vue ui组件库
+    // element ui 安装
+    // npm i element-ui
+    // 1. 全局   引入 css  use(ElementUi)
+    // 2. 按需   babel-component-plugin  修改 babel 配置()        需要哪些组件 引入哪些 并且 use
+
+    // 组件的使用
+    // 有现成的例子先看例子
+    // 根据文档查看  属性(组件的props)  或者   事件(组件的自定义事件, 注意回调参数)   或者   插槽    
