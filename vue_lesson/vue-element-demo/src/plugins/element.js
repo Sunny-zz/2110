@@ -1,5 +1,11 @@
 import Vue from 'vue';
-import { Button, Rate, Table, TableColumn, Tag, Popconfirm, Popover, Form, FormItem, Input, Select, Option, DatePicker, Dialog, Pagination, Loading, Message, Menu, Submenu, MenuItemGroup, MenuItem} from 'element-ui';
+import { Button, Rate, Table, TableColumn, Tag, Popconfirm, Popover, Form, FormItem, Input, Select, Option, DatePicker, Dialog, Pagination, Loading, Message, Menu, Submenu, MenuItemGroup, MenuItem, Tree } from 'element-ui';
+
+import lang from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale'
+
+// 设置语言
+locale.use(lang)
 
 // Vue.component(Button.name, Button);
 
@@ -23,6 +29,8 @@ Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItemGroup)
 Vue.use(MenuItem)
+Vue.use(Tree)
+Vue.use(DatePicker)
 
 
 

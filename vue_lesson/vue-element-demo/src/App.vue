@@ -18,19 +18,33 @@
     
     <div>{{book}}</div>
     <hr>
-    <TableDemo  />
+    <!-- <TableDemo  /> -->
     <hr>
     <MenuDemo />
+    <hr>
+    <TreeDemo />
+    <hr>
+    <el-date-picker
+      v-model="value1"
+      type="date"
+      placeholder="select date">
+    </el-date-picker>
+    <hr>
+    <ScssDemo />
+    <LessDemo />
   </div>
 </template>
 
 <script>
+import LessDemo from './components/LessDemo.vue';
 import MenuDemo from './components/MenuDemo.vue';
+import ScssDemo from './components/ScssDemo.vue';
 
-import TableDemo from './components/TableDemo.vue';
+// import TableDemo from './components/TableDemo.vue';
 import TestDemo from "./components/TestDemo.vue";
+import TreeDemo from './components/TreeDemo.vue';
 export default {
-  components: { TestDemo, TableDemo, MenuDemo},
+  components: { TestDemo, MenuDemo, TreeDemo, ScssDemo, LessDemo},
   data() {
     return {
       isLoading: false,
@@ -39,7 +53,8 @@ export default {
         id: '1gtyy6',
         importance: 2
       },
-      text: ''
+      text: '',
+      value1: ''
     };
   },
   created() {
