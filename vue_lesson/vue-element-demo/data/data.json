@@ -324,5 +324,23 @@
       "visit_count": 313,
       "status": "published"
     }
+  ],
+  "banner": [
+    {
+      "id": "1",
+      "imgSrc": "https://img13.360buyimg.com/babel/s590x470_jfs/t1/87845/21/28766/71552/62abe3bcEe524445a/8ab0409184d930e7.jpg.webp"
+    },
+    {
+      "id": "2",
+      "imgSrc": "https://imgcps.jd.com/ling4/100012043978/5Lqs6YCJ5aW96LSn/5L2g5YC85b6X5oul5pyJ/p-5f3a47329785549f6bc7a6ea/9126423f/cr/s/q.jpg"
+    },
+    {
+      "id": "3",
+      "imgSrc": "https://imgcps.jd.com/ling4/100003547337/5Lqs6YCJ5aW96LSn/5L2g5YC85b6X5oul5pyJ/p-5f3a47329785549f6bc7a6e1/7ffa7e25/cr/s/q.jpg"
+    },
+    {
+      "id": "4",
+      "imgSrc": "https://imgcps.jd.com/ling4/100026667858/5Lqs6YCJ5aW96LSn/5L2g5YC85b6X5oul5pyJ/p-5f3a47329785549f6bc7a6f5/6fb35a0d/cr/s/q.jpg"
+    }
   ]
 }

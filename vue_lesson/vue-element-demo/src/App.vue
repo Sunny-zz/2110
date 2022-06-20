@@ -32,6 +32,8 @@
     <hr>
     <ScssDemo />
     <LessDemo />
+    <hr>
+    <SwiperDemo />
   </div>
 </template>
 
@@ -39,12 +41,13 @@
 import LessDemo from './components/LessDemo.vue';
 import MenuDemo from './components/MenuDemo.vue';
 import ScssDemo from './components/ScssDemo.vue';
+import SwiperDemo from './components/SwiperDemo.vue';
 
 // import TableDemo from './components/TableDemo.vue';
 import TestDemo from "./components/TestDemo.vue";
 import TreeDemo from './components/TreeDemo.vue';
 export default {
-  components: { TestDemo, MenuDemo, TreeDemo, ScssDemo, LessDemo},
+  components: { TestDemo, MenuDemo, TreeDemo, ScssDemo, LessDemo, SwiperDemo},
   data() {
     return {
       isLoading: false,
