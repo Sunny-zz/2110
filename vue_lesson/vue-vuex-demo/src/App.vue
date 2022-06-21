@@ -2,7 +2,6 @@
   <div>
     <h2>todo</h2>
     <TodoDemo/>
-    <button @click="$store.commit('getTodos')">测试</button>
   </div>
 </template>
 
