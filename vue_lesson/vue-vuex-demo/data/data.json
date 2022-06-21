@@ -1,19 +1,14 @@
 {
   "todos": [
     {
-      "todoText": "12312312",
-      "isCompleted": true,
-      "id": "lp8JfVQ"
-    },
-    {
-      "todoText": "123123123",
-      "isCompleted": false,
-      "id": "dtLDUSA"
-    },
-    {
       "todoText": "1213",
       "isCompleted": false,
       "id": "s8b1EET"
+    },
+    {
+      "todoText": "123123",
+      "isCompleted": false,
+      "id": "7rvkkOZ"
     }
   ]
 }
