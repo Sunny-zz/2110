@@ -13,10 +13,11 @@ const store = new Vuex.Store({
     todos,
     type
   },
-  // state: {
-  //   todos: [],
-  //   type: 'active'
-  // },
+  state: {
+    // todos: [],
+    // type: 'active'
+    todoText: ''
+  },
   getters: {
     showTodos(state){
       const todos = state.todos.todos
@@ -27,25 +28,28 @@ const store = new Vuex.Store({
     //   return todos.filter(todo => !todo.isCompleted).length
     // }
   },
-  // mutations: {
-  //   // mutation 函数只能是同步的
-  //   getTodos(state, todos) {
-  //     state.todos = todos
-  //   },
-  //   addTodo(state, todo) {
-  //     state.todos.push(todo)
-  //   },
-  //   delTodo(state, id) {
-  //     state.todos = state.todos.filter(todo => todo.id !== id)
-  //   },
-  //   updateTodo(state, updateTodo) {
-  //     Object.assign(state.todos.find(todo => todo.id === updateTodo.id), updateTodo)
-  //     // state.todos.find(todo => todo.id === updateTodo.id) = newTodo
-  //   },
-  //   changeType(state, type){
-  //     state.type = type
-  //   }
-  // },
+  mutations: {
+    // mutation 函数只能是同步的
+    // getTodos(state, todos) {
+    //   state.todos = todos
+    // },
+    // addTodo(state, todo) {
+    //   state.todos.push(todo)
+    // },
+    // delTodo(state, id) {
+    //   state.todos = state.todos.filter(todo => todo.id !== id)
+    // },
+    // updateTodo(state, updateTodo) {
+    //   Object.assign(state.todos.find(todo => todo.id === updateTodo.id), updateTodo)
+    //   // state.todos.find(todo => todo.id === updateTodo.id) = newTodo
+    // },
+    // changeType(state, type){
+    //   state.type = type
+    // }
+    changeTodoText(state, text){
+      state.todoText = text
+    }
+  },
   // 当修改 state 需要异步操作修改的话， 那么就需要将 异步操作写在 actions 内
   // 那么 actions 内的 action 函数 其实会对应一个或多个 mutation 函数
   // action 函数异步执行完毕之后需要使用 commit 执行 mutation 函数去处理对应 state 

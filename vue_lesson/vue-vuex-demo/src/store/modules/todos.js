@@ -1,11 +1,12 @@
 // todos 模块
 import axios from 'axios'
+const GET_TODOS = 'GET_TODOS'
 const todos = {
   state: () => ({
     todos: []
   }),
   mutations: {
-    getTodos(state, todos) {
+    [GET_TODOS](state, todos) {
       state.todos = todos
     },
     addTodo(state, todo) {
@@ -20,14 +21,16 @@ const todos = {
     },
   },
   actions: {
-    async getTodos({ commit }) {
+    async getTodos(context) {
+      const { commit } = context
+      console.log(context)
       const res = await axios.get('http://localhost:3008/todos')
-      commit('getTodos', res.data)
+      commit(GET_TODOS, res.data)
     },
-    async addTodo({ commit }, { todo, callback }) {
+    async addTodo({ commit }, { todo }) {
       const res = await axios.post('http://localhost:3008/todos', todo)
       commit('addTodo', res.data)
-      callback()
+      commit('changeTodoText', '')
     },
     async delTodo({ commit }, id) {
       await axios.delete(`http://localhost:3008/todos/${id}`)
@@ -41,6 +44,7 @@ const todos = {
     }
   },
   getters: {
+    // 模块的计算属性， 如果需要使用 store 其他数据 或者其他的 getter 的话，可以给 getters 传递三个参数分别是 state  getters rootState
     activeNum({todos}){
       return todos.filter(todo => !todo.isCompleted).length
     }

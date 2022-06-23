@@ -331,3 +331,25 @@ vue 中如何制作全局的内容
     - commit('mutation函数名', mutation函数的第二个参数)   
     - commit({type:'mutation函数名' , 其余属性}) 整个传递的对象是mutation函数的第二个参数
 
+
+
+
+
+vuex
+
+store
+
+state  
+mutations
+actions
+getters
+modules 
+
+
+组件
+$store.state   mapState(count: state => state.xxx)
+$store.getters  mapGetters
+
+
+action  mapActions     $store.dispatch
+mutation mapMutations   $store.commit

@@ -7,9 +7,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      todoText: ''
+  computed: {
+    todoText: {
+      get(){
+        return this.$store.state.todoText
+      },
+      set(text){
+        this.$store.commit('changeTodoText', text)
+      }
     }
   },
   methods: {
@@ -18,11 +23,7 @@ export default {
       if(todoText){
         this.$store.dispatch({
           type: 'addTodo',
-          todo: { todoText , isCompleted: false},
-          callback: () => {
-            console.log('清空')
-            this.todoText = ''
-          }
+          todo: { todoText , isCompleted: false}
         })
       }
     }

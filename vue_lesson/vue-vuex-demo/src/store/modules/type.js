@@ -2,6 +2,7 @@
 // 每一各模块都是一个对象
 
  const type = {
+  namespaced: true,
   state: () => ({
     type: 'all'
   }),
