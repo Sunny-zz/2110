@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="getTopics()">发请求</button>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    // 跨域   
+    // 发 ajax 请求的时候
+    // 非同源
+    // 协议、域名、端口号都相同，只要有一个不相同，那么都是非同源
+    // 浏览器的同源策略  当 ajax 请求的时候不允许不同源的服务器相互访问 
+    // 如果非同源请求了那么就会提示 cors 报错
+    // CORS全称Cross-Origin Resource Sharing，意为跨域资源共享。
+
+
+    // 解决跨域
+    function getTopics() {
+      // axios.get('https://www.vue-js.com/api/v1/topics').then(res => {
+      //   console.log(res)
+      // })
+      $.ajax({
+        url: "http://www.vue-js.com/api/v1/topics",
+        dataType: "jsonp",
+        success: function (data) {
+          console.log(data);
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
