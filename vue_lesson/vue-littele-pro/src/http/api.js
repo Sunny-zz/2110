@@ -7,3 +7,9 @@ export const getTopics = ({ params }) => http({
   params,
   url: '/topics'
 })
+
+// 获取文章详情
+export const getTopic = ({id}) => http({
+  url: '/topic/'+ id,
+  method: 'get'
+})
