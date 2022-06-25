@@ -13,3 +13,10 @@ export const getTopic = ({id}) => http({
   url: '/topic/'+ id,
   method: 'get'
 })
+
+// 验证 accesstoken 其实就是登陆
+export const login = (data) => http({
+  url: '/accesstoken',
+  method: 'post',
+  data
+})

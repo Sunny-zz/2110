@@ -5,9 +5,13 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    count : 100
+    userInfo : null
   },
-  modules: {}
+  mutations: {
+    getUserInfo(state, userInfo){
+      state.userInfo = userInfo
+    }
+  }
 })
 
 export default store

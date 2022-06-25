@@ -1,7 +1,9 @@
 <template>
   <div class="main">
     <HeaderNav />
-    <router-view />
+    <div class="content">
+      <router-view />
+    </div>
     <FooterInfo /> 
   </div>
 </template>
@@ -13,7 +15,16 @@ export default {
   components: { HeaderNav, FooterInfo },
 }
 </script>
-
-<style>
-
+<style lang="less" scoped>
+.main{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .header-nav, footer{
+    flex-shrink: 0;
+  }
+  .content{
+    flex-grow: 1;
+  }
+}
 </style>
