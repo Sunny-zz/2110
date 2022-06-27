@@ -34,6 +34,9 @@ export default {
   watch: {
     tab: {
       async handler(tab) {
+        if(tab && !['all', 'share', 'ask', 'job','dev', 'good'].includes(tab)){
+          this.$router.push('/notfound')
+        }
         const res = await getTopics({ params: { tab: tab, page: 1, limit: 20 } });
         this.topics = res.data;
         // 模拟请求返回值的总条数

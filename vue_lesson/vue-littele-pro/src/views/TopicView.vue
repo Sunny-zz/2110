@@ -40,6 +40,7 @@
           :reply="reply"
           :mostReplyUpsId="mostReplyUpsId"
           :userInfo="userInfo"
+          @getTopic='getTopic'
         />
       </template>
     </PanelContainer>
@@ -48,8 +49,8 @@
       <template #head> 添加回复</template>
       <template #content>
         <!-- 输入评论 -->
-        <el-input type="textarea" v-model="replyText"></el-input>
-        <el-button>提交</el-button>
+        <el-input type="textarea" v-model.trim="replyText"></el-input>
+        <el-button @click="addReply">提交</el-button>
       </template>
     </PanelContainer>
   </div>
@@ -58,7 +59,7 @@
 <script>
 import PanelContainer from "../components/PanelContainer.vue";
 import RepliesItem from "../components/RepliesItem.vue";
-import { collectTopic, deCollectTopic, getTopic } from "../http/api";
+import { addTopicReply, collectTopic, deCollectTopic, getTopic } from "../http/api";
 import { mapState } from "vuex";
 export default {
   components: { PanelContainer, RepliesItem },
@@ -84,32 +85,50 @@ export default {
     ...mapState(["userInfo"]),
     accesstoken() {
       const accesstoken = localStorage.getItem("accesstoken");
-      return accesstoken || ''
+      return accesstoken || "";
     },
   },
   async created() {
-    let params = { id: this.id };
-    if(this.accesstoken){
-      params.accesstoken = this.accesstoken
-    }
-    const res = await getTopic(params);
-    this.topic = res.data;
+    // let params = { id: this.id };
+    // if (this.accesstoken) {
+    //   params.accesstoken = this.accesstoken;
+    // }
+    // const res = await getTopic(params);
+    // this.topic = res.data;
+    this.getTopic()
   },
   methods: {
     // 收藏
     async collect() {
       const { topic, accesstoken } = this;
-      await collectTopic({ topic_id: topic.id, accesstoken  });
-      // console.log(res)
-      this.topic.is_collect = true
+      await collectTopic({ topic_id: topic.id, accesstoken });
+      this.topic.is_collect = true;
     },
     // 取消收藏
     async deCollect() {
       const { topic, accesstoken } = this;
-      await deCollectTopic({ topic_id: topic.id, accesstoken  });
-      // console.log(res)
-      this.topic.is_collect = false
+      await deCollectTopic({ topic_id: topic.id, accesstoken });
+      this.topic.is_collect = false;
     },
+
+    async getTopic() {
+      let params = { id: this.id };
+      if (this.accesstoken) {
+        params.accesstoken = this.accesstoken;
+      }
+      const res = await getTopic(params);
+      this.topic = res.data;
+    },
+    
+    async addReply(){
+      const {replyText} = this
+      if(replyText) {
+        // 添加评论
+       await addTopicReply({accesstoken: this.accesstoken, content: replyText, id: this.topic.id})
+       this.replyText = ''
+       this.getTopic()
+      }
+    }
   },
 };
 </script>

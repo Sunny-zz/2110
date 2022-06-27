@@ -5,6 +5,8 @@ import LoginView from '../views/LoginView.vue'
 import MainView from '../views/MainView.vue'
 import TopicsView from '../views/TopicsView.vue'
 import TopicView from '../views/TopicView.vue'
+import UserView from '../views/UserView.vue'
+import NotFound from '../views/NotFound.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -17,6 +19,10 @@ const routes = [
     path: '/',
     component: MainView,
     children: [
+      {
+        path: '/notfound',
+        component: NotFound
+      },
       {
         path: '',
         component: HomeView,
@@ -39,7 +45,14 @@ const routes = [
         props: true,
         name: 'topic',
         component: TopicView
-      }
+      },
+      {
+        path: '/user/:loginname',
+        props: true,
+        name: 'user',
+        component: UserView
+      },
+      
     ]
   }
   

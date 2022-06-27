@@ -47,11 +47,13 @@
         <router-link to="/">未读消息</router-link>
         <router-link v-if="!userInfo" to="/login">登录</router-link>
         <template v-else>
-          <el-avatar
+          <router-link :to="`/user/${userInfo.loginame}`">
+            <el-avatar
             shape="square"
             :size="40"
             :src="userInfo.avatar_url"
           ></el-avatar>
+          </router-link>
           <el-button type='text' @click="logout" >退出</el-button>
         </template>
       </div>

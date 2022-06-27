@@ -35,3 +35,24 @@ export const deCollectTopic = (data) => http({
   method: 'post',
   data
 })
+
+// 评点赞和取消点赞
+export const replyLike = ({reply_id, accesstoken}) => http({
+  url: `/reply/${reply_id}/ups`,
+  method: 'post',
+  data: {accesstoken}
+})
+
+// 添加文章评论
+export const addTopicReply = ({id, accesstoken, content}) => http({
+  url: `/topic/${id}/replies`,
+  method: 'post',
+  data: {accesstoken, content}
+})
+
+// 获取用户详情
+export const getUserDetail = ({loginname}) => http({
+  url: `/user/${loginname}`,
+  method: 'get'
+})
+
