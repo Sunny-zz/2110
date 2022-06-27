@@ -7,14 +7,14 @@
     </div>
     <div class="operation">
       <span>赞 {{reply.ups.length}}</span>
-      <span>回</span>
+      <span v-if="userInfo">回</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['reply', 'index', 'mostReplyUpsId']
+  props: ['reply', 'index', 'mostReplyUpsId', 'userInfo']
 }
 </script>
 

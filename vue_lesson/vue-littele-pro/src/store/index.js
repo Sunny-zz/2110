@@ -11,6 +11,14 @@ const store = new Vuex.Store({
     getUserInfo(state, userInfo){
       state.userInfo = userInfo
     }
+  },
+  actions: {
+    getUserInfo({commit}){
+      const userInfo = localStorage.getItem('userInfo')
+      if(userInfo){
+        commit('getUserInfo', JSON.parse(userInfo))
+      }
+    }
   }
 })
 

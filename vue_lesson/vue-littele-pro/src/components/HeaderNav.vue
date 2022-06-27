@@ -52,7 +52,7 @@
             :size="40"
             :src="userInfo.avatar_url"
           ></el-avatar>
-          <el-button type='text' >退出</el-button>
+          <el-button type='text' @click="logout" >退出</el-button>
         </template>
       </div>
     </div>
@@ -60,10 +60,21 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   computed: {
     ...mapState(["userInfo"]),
+  },
+  methods: {
+    ...mapMutations(['getUserInfo']),
+    logout() {
+      this.getUserInfo(null)
+      localStorage.removeItem('userInfo')
+      localStorage.removeItem('accesstoken')
+      if(this.$route.path !== '/'){
+        this.$router.push('/')
+      }
+    }
   },
 };
 </script>

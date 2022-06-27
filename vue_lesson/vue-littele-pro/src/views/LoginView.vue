@@ -90,6 +90,7 @@ export default {
                 id: res.id
               }
               localStorage.setItem('userInfo', JSON.stringify(userInfo))
+              localStorage.setItem('accesstoken', this.userInfo.password)
               this.$store.commit('getUserInfo', userInfo)
               this.$router.push("/");
             })

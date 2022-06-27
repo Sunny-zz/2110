@@ -3,10 +3,26 @@
     <PanelContainer>
       <template #content>
         <div class="topic-content">
-          <h2>{{ topic.title }}</h2>
-          <p>
-            <span>{{ topic.author.loginname }}</span>
-          </p>
+          <div class="topic-head">
+            <h2>{{ topic.title }}</h2>
+            <p>
+              <span>{{ topic.author.loginname }}</span>
+              <template v-if="userInfo">
+                <el-button
+                  @click="collect"
+                  v-if="!topic.is_collect"
+                  type="success"
+                  >收藏</el-button
+                >
+                <el-button
+                  @click="deCollect"
+                  v-if="topic.is_collect"
+                  type="default"
+                  >取消收藏</el-button
+                >
+              </template>
+            </p>
+          </div>
           <hr />
           <div class="topic-html" v-html="topic.content"></div>
         </div>
@@ -23,11 +39,12 @@
           :index="index"
           :reply="reply"
           :mostReplyUpsId="mostReplyUpsId"
+          :userInfo="userInfo"
         />
       </template>
     </PanelContainer>
     <!-- 评论框 -->
-    <PanelContainer>
+    <PanelContainer v-if="userInfo">
       <template #head> 添加回复</template>
       <template #content>
         <!-- 输入评论 -->
@@ -41,7 +58,8 @@
 <script>
 import PanelContainer from "../components/PanelContainer.vue";
 import RepliesItem from "../components/RepliesItem.vue";
-import { getTopic } from "../http/api";
+import { collectTopic, deCollectTopic, getTopic } from "../http/api";
+import { mapState } from "vuex";
 export default {
   components: { PanelContainer, RepliesItem },
   props: ["id"],
@@ -63,10 +81,35 @@ export default {
       });
       return id;
     },
+    ...mapState(["userInfo"]),
+    accesstoken() {
+      const accesstoken = localStorage.getItem("accesstoken");
+      return accesstoken || ''
+    },
   },
   async created() {
-    const res = await getTopic({ id: this.id });
+    let params = { id: this.id };
+    if(this.accesstoken){
+      params.accesstoken = this.accesstoken
+    }
+    const res = await getTopic(params);
     this.topic = res.data;
+  },
+  methods: {
+    // 收藏
+    async collect() {
+      const { topic, accesstoken } = this;
+      await collectTopic({ topic_id: topic.id, accesstoken  });
+      // console.log(res)
+      this.topic.is_collect = true
+    },
+    // 取消收藏
+    async deCollect() {
+      const { topic, accesstoken } = this;
+      await deCollectTopic({ topic_id: topic.id, accesstoken  });
+      // console.log(res)
+      this.topic.is_collect = false
+    },
   },
 };
 </script>
@@ -78,6 +121,10 @@ export default {
     img {
       width: 100%;
     }
+  }
+  .topic-head p {
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>
