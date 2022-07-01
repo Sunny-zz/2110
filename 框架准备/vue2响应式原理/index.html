@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // Object.defineProperty
+
+    const obj = {}
+    let name = '哈哈哈'
+    // Object.defineProperty(对象， 属性名 ， 属性描述)
+    Object.defineProperty(obj, 'name', {
+      configurable: true,
+      enumerable: true,
+      get(){
+        return name
+      },
+      set(value){
+        name = value
+        console.log(value)
+        // 视图改变
+      }
+    })
+
+    obj.name = '啦啦啦'
+
+    console.log(obj.name)
+
+
+    
+
+  </script>
+</body>
+</html>
