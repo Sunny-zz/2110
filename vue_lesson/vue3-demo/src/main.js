@@ -1,11 +1,14 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router'
+import store from './store'
 
-import { ElButton } from 'element-plus'
 
 const app = createApp(App)
 
-app.use(ElButton)
+app.use(router)
+app.use(store)
+
 app.config.globalProperties.$axios = 'http'
 // app.config.globalProperties   ----  Vue.prototype
 

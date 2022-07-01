@@ -7,6 +7,7 @@ const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
   transpileDependencies: true,
+  // vuecli 搭建的环境 vue.config.js 想加一些 webpack 配置的话 需要使用 configureWebpack 字符段
   configureWebpack: {
     plugins: [
       AutoImport({
