@@ -1,39 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>vue2 响应式原理</title>
 </head>
+
 <body>
   <script>
 
     // Object.defineProperty
 
-    const obj = {}
-    let name = '哈哈哈'
-    // Object.defineProperty(对象， 属性名 ， 属性描述)
-    Object.defineProperty(obj, 'name', {
-      configurable: true,
-      enumerable: true,
-      get(){
-        return name
+    // const obj = {}
+    // let name = '哈哈哈'
+    // // Object.defineProperty(对象， 属性名 ， 属性描述)
+    // Object.defineProperty(obj, 'name', {
+    //   configurable: true,
+    //   enumerable: true,
+    //   get(){
+    //     return name
+    //   },
+    //   set(value){
+    //     name = value
+    //     console.log(value)
+    //     // 视图改变
+    //   }
+    // })
+
+    // obj.name = '啦啦啦'
+
+    // console.log(obj.name)
+
+
+
+
+    // vue2 响应式原理    Object.defineProperty 
+
+    const data = {
+      msg: 'hello vue2',
+      num: 100,
+      show: false,
+      userInfo: {
+        name: '大白',
+        age: 10
       },
-      set(value){
-        name = value
-        console.log(value)
-        // 视图改变
+      arr: [1,2,3]
+    }
+
+    function updateView() {
+      console.log('可能要更新视图')
+    }
+
+    const defineReactive = (obj, key, value) => {
+      // value 在闭包中
+      observe(value)
+      Object.defineProperty(obj, key, {
+        enumerable: true,
+        get() {
+          return value
+        },
+        set(newVal) {
+          if (newVal !== value) {
+            value = newVal
+            observe(newVal)
+            updateView()
+          }
+        }
+      })
+    }
+
+    // 当 数组 执行  push  的时候 需要更新视图
+    // 重写 push 方法 在原有基础上  添加上视图更新函数
+
+    // 存储原来的数组原型 不希望修改数组的原型
+    // 类似需要拷贝 （数组的原型不太好拷贝）
+    const oldArrayPrototype = Array.prototype
+    
+    // 利用 Object.create  相当于做了拷贝， 只不过将其放在了 arrPrperty 的原型内
+    const arrPrperty = Object.create(oldArrayPrototype)
+    
+    // 需要重写以下方法
+    const methods = ['push','pop','shift','unshift','splice', 'reverse', 'sort']
+    
+    methods.forEach(item => {
+      arrPrperty[item] = function(){
+        updateView()
+        Array.prototype.push.call(this, ...arguments)
       }
     })
+    // arrPrperty 里面的原型对象 和数组的原型对象基本一致，区别是 methods 内的方法被重写了
+    // 所以 data 内的数组的原型需要指向 arrPrperty 的原型
+    const observe = (target) => {
+      
+      if (typeof target !== 'object' || target === null) {
+        return target
+      }
 
-    obj.name = '啦啦啦'
+      if(Array.isArray(target)) {
+        target.__proto__ = arrPrperty
+        return 
+      }
 
-    console.log(obj.name)
+      for (let key in target) {
+        defineReactive(target, key, target[key])
+        // observe(target[key])
+      }
+    }
 
+    observe(data)
 
+    data.msg = 'hello vue3'
+
+    data.num = 10000
+
+    data.show = false
+
+    // data.userInfo.name = {
+    //   value: '大白',
+    //   id: '6y7y'
+    // }
+
+    // data.userInfo.name.value = '111111'
+
+    // data.userInfo.hobby = '篮球'
+    // vue 对象新增属性也不会触发视图更新
+    // 需要使用 重新赋值方案 或者 $set 更新
+    
+    data.arr.push(100)
+    
+    console.log(data)
     
 
   </script>
 </body>
+
 </html>

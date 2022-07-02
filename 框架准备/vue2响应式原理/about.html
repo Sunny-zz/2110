@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue3 响应式原理</title>
+
+</head>
+<body>
+  <script>
+    // vue2 vue3 响应式区别
+    
+    // proxy
+
+    const data = {
+      num: 100,
+      show: false,
+      user: {
+        avatar_url: 'xxx.xx/xs/png',
+        loginname: '啦啦啦'
+      }
+    }
+
+    function updateView() {
+      console.log('可能要更新视图')
+    }
+
+    const res = new Proxy(data, {
+      get(target, key, receiver){
+        return target[key]
+      },
+      set(target, key, value, receiver){
+        updateView()
+        // return 
+        // data[key] = value
+        Reflect.set(target, key, value, receiver)
+      }
+    })
+
+    res.num = '10000'
+    res.a = 100
+    
+    console.log(res)
+  </script>
+</body>
+</html>
